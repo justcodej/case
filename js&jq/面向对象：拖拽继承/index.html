@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>面向对象：拖拽继承</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		#box1{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 150px;
+			height: 150px;;
+			background: red;
+			cursor: move;
+		}
+		#box2{
+			position: absolute;
+			top: 0;
+			left: 150px;;
+			width: 150px;;
+			height: 150px;;
+			background: orange;
+			cursor: move;
+		}
+	</style>
+	<script>
+
+
+
+
+		var P1 = null;
+		var disX = null;
+		var disY = null;
+
+		window.onload = function(){
+			P1 = new ParentDrag('box1');
+			P1.init();
+
+			P2 = new ChildDrag('box2');
+			P2.init();
+		}
+		function ParentDrag(id){ // 父构建函数
+			this.obj = document.getElementById(id);
+			this.disX = 0;
+			this.disY = 0;
+		}
+
+		ParentDrag.prototype.init = function(){
+			var This = this;
+			this.obj.onmousedown = function(ev){
+				ev = ev||window.event;
+				This.fnDown(ev);
+			};
+		}
+		ParentDrag.prototype.fnDown = function(ev){
+			var This = this;
+			this.disX = ev.clientX - this.obj.offsetLeft;
+			this.disY = ev.clientY - this.obj.offsetTop;
+
+			document.onmousemove = function(ev){
+				ev = ev||window.event;
+				This.fnMove(ev);
+			}
+			document.onmouseup = this.fnUp;
+			return false;
+		}
+		ParentDrag.prototype.fnMove = function(ev){
+			this.obj.style.left = ev.clientX - this.disX + 'px';
+			this.obj.style.top = ev.clientY - this.disY + 'px';
+		}
+		ParentDrag.prototype.fnUp = function(){
+			document.onmousemove = null;
+			document.onmouseup = null;
+		}
+
+		function ChildDrag(id){ // 子构建函数 
+			ParentDrag.call(this,id);
+		}
+
+		extend( ChildDrag.prototype , ParentDrag.prototype );
+		
+		ChildDrag.prototype.fnMove = function(ev){
+			var L = ev.clientX - this.disX;
+			var T = ev.clientY - this.disY;
+
+			L = Math.min(document.documentElement.clientWidth - this.obj.offsetWidth,L)
+			L = Math.max(0,L)
+			T = Math.min(document.documentElement.clientHeight - this.obj.offsetHeight,T)
+			T = Math.max(0,T)
+
+			this.obj.style.left = L + 'px';
+			this.obj.style.top = T + 'px';
+		}
+
+		function extend( obj1,obj2 ){
+			for( var attr in obj2 ){
+				obj1[attr] = obj2[attr]
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box1"></div>
+	<div id="box2"></div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>是否为qq号</title>
+</head>
+<body>
+	<span>请输入QQ号码：</span>
+	<input type="text">
+	<input type="button" value="判断">
+	<p>1、有没有输入</p>
+	<p>2、输入的是不是数字</p>
+	<p>3、不能有0在前面</p>
+	<p>4、不能是小数</p>
+	<p>5、输入的数字是5-11之间位</p>
+	<script>
+	var oText = document.getElementsByTagName('input')[0];
+	var obtn = document.getElementsByTagName('input')[1];
+
+	obtn.onclick = function(){
+		var num = oText.value;
+		if (num == "") {
+			alert('输入的不能为空');
+		}else if(isNaN(num)){
+			alert('请输入一个数字');
+		}else if(num < "1"){
+			alert('不能以0开始');
+		}else if(num.length<='4'){
+			alert('请输入5-11位的数字');
+		}else{
+			for (var i = 0; i < num.length; i++) {
+				if (num.charAt(i) == ".") {
+					alert('不能是小数');
+				};
+			};
+		};
+	};
+
+	</script>
+</body>
+</html>

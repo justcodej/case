@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		#box1{
+			position:absolute;
+			left:50%;
+			top: 50%;
+			width: 100px;
+			height: 100px;
+			background: orange;
+			margin-left:-50px;
+			margin-top:-50px;
+		}
+		#box2{
+			position: absolute;
+			top: 100px;
+			left: 100px;
+			width: 150px;
+			height: 150px;
+			background: #0f0;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			drag(box2);
+			function drag( obj ){
+				obj.onmousedown = function(e){
+					var e = e || event;
+					var disX = e.clientX - obj.offsetLeft;
+					var disY = e.clientY - obj.offsetTop;
+					if (obj.setCapture) {  // 创建遮罩层 兼容IE拖动下字体选中出现的问题
+						obj.setCapture();
+					}
+					document.onmousemove = function(e){
+						var e = e || event;
+						var l = e.clientX-disX;
+						var t = e.clientY-disY;
+						// 获取box2移动后的位置
+						var L1 = l;
+						var R1 = L1 + obj.offsetWidth;
+						var T1 = t;
+						var B1 = T1 + obj.offsetHeight;
+						// 获取box1碰撞体的位置
+						var L2 = box1.offsetLeft;
+						var R2 = L2 + box1.offsetWidth;
+						var T2 = box1.offsetTop;
+						var B2 = T2 + box1.offsetHeight;
+
+						// 判断移动后位置是否碰撞到
+						if (R1 < L2 || B1 < T2 || L1 > R2 || T1 > B2) {
+							box1.style.background = 'orange';
+						}else{
+							box1.style.background = '#0f0';
+						}
+						if (l < 0 ) {  // 判断left位置是否小于或者left位置是否大于窗口位置 小于或者大于就等于
+							l = 0;
+						}else if( l > document.documentElement.clientWidth - obj.offsetWidth ){
+							l = document.documentElement.clientWidth - obj.offsetWidth;
+						}
+						if (t < 0) {  // 判断top位置是否小于或者top位置是否大于窗口位置 小于或者大于就等于
+							t = 0
+						}else if(t > document.documentElement.clientHeight - obj.offsetHeight ){
+							t = document.documentElement.clientHeight - obj.offsetHeight;
+						}
+						obj.style.cssText = 'left:'+l+'px;top:'+t+'px;';
+					};
+					document.onmouseup = function(){
+						document.onmousemove = null;
+						document.onmouseup = null;
+						if (obj.releaseCapture) {  // 兼容 删除IE下创建的遮罩层
+							obj.releaseCapture();
+						}
+					}
+					return false;  // 事件默认 标准浏览器去除文字选中
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box1"></div>
+	<div id="box2"></div>
+</body>
+</html>

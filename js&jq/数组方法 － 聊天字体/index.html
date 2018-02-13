@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0px; padding: 0px;list-style: none;}
+		body{
+			background: url(images/bg.jpg);
+		}
+		#wrap{
+			width: 1200px;
+			margin:0 auto;
+		}
+		#con{
+			width: 720px;
+			height: 760px;
+			border-radius: 10px;
+			border: 2px solid #ddd;
+			margin:200px auto;
+			background: #fdfdfb;
+		}
+		#display{
+			height: 450px;
+			width: 680px;
+			background: red;
+			padding: 20px;
+			border-top-right-radius: 10px;
+			border-top-left-radius: 10px;
+		}
+		#menu{
+			width: 106px;
+			height: 23px;
+			background: url(images/ipt.png) no-repeat 0px -269px;
+			margin: 5px;
+			
+			cursor: pointer;
+			position: relative;
+		}
+		#menu p{
+			font-size: 12px;
+			text-align: left;
+			line-height: 23px;
+		}
+		#menu ul{
+			background: #f8fcfe;
+			display: none;
+			overflow: hidden;
+			position: absolute;
+			top: 23px;
+			left: 0px;
+		}
+		#menu ul li{
+			width:106px;
+			height: 23px;
+			font-size: 12px;
+			text-align: left;
+			line-height: 23px;
+		}
+		#text{
+			padding: 10px;
+			width: 700px;
+			height: 140px;
+			background: #fff;
+			margin:0 auto;
+			border:none;
+			resize:none;
+		}
+		#btn{
+			width: 80px;
+			height: 30px;
+			margin: 28px 0px 0px 618px;
+			background: orange;
+			text-align: center;
+			line-height: 30px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		span{
+			display: inline-block;
+			width: 35px;
+			height: 35px;
+			background: url(images/se.png) no-repeat;
+			text-align: center;
+			line-height: 35px;
+		};
+	</style>
+	<script>
+		window.onload = function(){
+			var aMenu = document.getElementById('menu');
+			var oP = aMenu.getElementsByTagName('p')[0];
+			var oUl = aMenu.getElementsByTagName('ul')[0];
+			var aLi = oUl.getElementsByTagName('li');
+			var oBtn = document.getElementById('btn');
+			var oText = document.getElementById('text');
+			var oDisplay = document.getElementById('display');
+			var str = '';
+			var str2 = '';
+			aMenu.onmouseover = function(){
+				this.style.backgroundPosition = '0px -246px';
+			};
+			aMenu.onmouseout = function(){
+				this.style.backgroundPosition = '0px -269px';
+			};
+			aMenu.onclick = function(){
+				oUl.style.display = 'block';
+			};
+			oUl.onmouseover = function(){
+				this.style.display = 'block';
+			};
+			oUl.onmouseout = function(){
+				this.style.display = 'none';
+			};
+			for (var i = 0; i < aLi.length; i++) {
+				aLi[i].onmouseover = function(){
+					for (var j = 0; j < aLi.length; j++) {
+						aLi[j].style.background = '';
+					}
+					this.style.background = '#e3f5fb';
+				}
+			}
+			for (var i = 0; i < aLi.length; i++) {
+				aLi[i].onmouseout = function(){
+					this.style.background = '';
+				}
+			}
+			for (var i = 0; i < aLi.length; i++) {
+				aLi[i].onclick = function(){
+					oP.innerHTML = this.innerHTML;
+				};
+			};
+			oBtn.onclick = function(){
+				str = oText.value;
+				str2 = '';
+				for (var i = 0; i < str.length; i++) {
+					str2 += '<span>'+ str.substr(i,1)+'</span>'
+				}
+				oDisplay.innerHTML = str2;
+				oText.value = '';
+			};
+		};
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<div id="con">
+			<div id="display"></div>
+			<div id="menu">
+				<p>字体样式</p>
+				<ul>
+					<li>气球字体</li>
+					<li>气球字体</li>
+					<li>气球字体</li>
+				</ul>
+			</div>
+			<textarea id="text" cols="100" rows="10"></textarea>
+			<div id="btn">发送</div>
+		</div>
+	</div>
+</body>
+</html>

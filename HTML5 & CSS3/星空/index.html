@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>星空</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		#canvas{
+			display: block;
+			background: #000;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			var oCan = document.getElementById('canvas');
+			var cxt = oCan.getContext('2d');
+			var num = 200;
+			var arr = [];
+			var move = {};
+
+			var w = oCan.width = window.innerWidth;
+			var h = oCan.height = window.innerHeight;
+
+			document.onmousemove = function(e){
+				move.x = e.clientX;
+				move.y = e.clientY;
+			};
+			
+			for (var i = 0; i < num; i++) {
+				arr[i] = {
+					x : parseInt( Math.random()*w ),
+					y : parseInt( Math.random()*h ),
+					r : Math.random()*10+1
+				};
+				Cricle(arr[i].x,arr[i].y,arr[i].r);
+			};
+
+			!function draw(){
+				cxt.clearRect(0,0,w,h);
+				for (var i = 0; i < num; i++) {
+					arr[i].r += Math.random()*2-1;
+					arr[i].r = Math.max( 0,arr[i].r );
+					arr[i].r = Math.min( 15,arr[i].r );
+					Cricle( arr[i].x,arr[i].y,arr[i].r );
+				};
+				window.requestAnimationFrame(draw);
+			}();
+			function Cricle(x,y,r){
+				cxt.save();
+				var CanvasGradient = cxt.createRadialGradient(x,y,0,x,y,r);
+					CanvasGradient.addColorStop(0,'rgba(255,255,255,0.8)');
+					CanvasGradient.addColorStop(0.1,'rgba(255,255,255,0.8)');
+					CanvasGradient.addColorStop(0.2,'rgba(255,255,255,0.08)');
+					CanvasGradient.addColorStop(1,'rgba(255,255,255,0)');
+				cxt.fillStyle = CanvasGradient;
+				cxt.beginPath();
+				cxt.arc(x,y,r,0,2*Math.PI,true);
+				cxt.fill();
+				cxt.closePath();
+				cxt.restore();
+			};
+
+		};
+	</script>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>定时器一些案例</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+	}
+	body{
+		background: green;
+	}
+	#box{
+		width:100px;
+		height:100px;
+		background: red;
+		position: absolute;
+		top:50px;
+		left: 50px;
+	}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<input type="button" value="点击">
+	<script>
+	var aInput = document.getElementsByTagName('input');
+	var oBox = document.getElementById('box');
+	aInput[0].onclick = function(){
+		fn(oBox,20,1000,'top',function(){
+			fn(oBox,20,1000,'left',function(){
+				fn(oBox,20,50,'top',function(){
+					fn(oBox,20,50,'left');
+				});
+			});
+		});
+	};
+	function fn( obj,dir,target,attr,fnEnd){
+		dir = parseInt(getStyle(obj,attr))<target?dir:-dir;               //判断元素的top值或者别的值小于目标值 那么给 ++ 正值反之负
+		clearInterval(obj.Timer)                                          // 上来就清除定时 可以解决累加定时
+		obj.Timer = setInterval( function(){                              // 这里可以不用var 回收内存 可以理解为把定时给对象的一个Timer属性
+		var s = parseInt(getStyle(obj,attr))+ dir;                        // 属性累加 ++
+			if (s > target && dir > 0 || s<target && dir <0)s=target;     //判断s累加后是否大于或小于目标值并且累加基数是否为正或者负
+				obj.style[attr] = s +"px";                                // 写入样式
+			if (s == target){                                             // 累加后等于传入值 停止定时
+				clearInterval(obj.Timer);
+				if (fnEnd)fnEnd();										  // 判断是否有传入值，有则执行
+			};
+		},13 );
+	};
+	function getStyle(obj,attr ){
+		return obj.currentStyle?currentStyle[attr]:getComputedStyle(obj)[attr]; 		// 浏览器获取行间样式的兼容代码
+	};
+	</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+	}
+	#Img{
+		position:absolute;
+		top:200px;
+		left:200px;
+	}
+	</style>
+</head>
+<body>
+	<img id="Img" src="images/1.1.jpg" alt="">
+
+	<script type="text/javascript" src="js/Move.js"></script>
+	<script>
+	var arr = [];
+	var dir = parseInt(getStyle(Img,'left'));
+
+	for (var i = 10; i > 0; i-=2) {
+		arr.push(i,-i);
+	};
+	arr.push(0);
+
+	Img.onmouseover = function(){
+		clearInterval(Img.Timer);
+		var num = 0;
+		this.Timer = setInterval(function(){
+			Img.style.left = dir + arr[num]+'px';
+			num ++;
+			if (num > arr.length || arr[num]==0){
+				clearInterval(Img.Timer);
+				fn( Img,13,900,'top',function(){
+					Img.style.display = 'none';
+				});
+			};
+		},100);
+	};
+	</script>
+</body>
+</html>

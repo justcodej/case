@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" onselectstart='return false'>
+<head>
+	<meta charset="UTF-8">
+	<title>拖动排序</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		body{
+			background: #000;
+			overflow: hidden;
+			height: 100%;
+		}
+		#list{
+			height: 100%;
+		}
+		#list li{
+			position: absolute;
+			width:50px;
+			height:70px;
+			background-size:50px 50px;
+			background-repeat: no-repeat;
+			background-origin:content-box;
+			padding: 5px;
+			border-radius: 3px;
+			top: 0;
+			left: 0;
+		}
+		#list li:hover{
+			background-color: rgba(255,255,255,.2);
+		}
+		#list span{
+			position: absolute;
+			bottom: 0px;
+			display: block;
+			width: 100%;
+			height: 20px;
+			text-align: center;
+			line-height: 20px;
+			font-size: 15px;
+			color: #fff;
+		}
+	</style>
+	<script src='js/jQ.js'></script>
+	<script>
+		$(function(){
+			var $li = $('#list li');
+			var liH = $li.outerHeight();
+			var liW = $li.outerWidth();
+			var num = 6;
+			var winH,h_
+			init();
+			$(window).resize(function(){
+				init();
+			});
+			function init(){
+				winH = $(window).height();
+				h_ = (winH-liH*num)/num;
+				h_ = Math.max(0,h_)
+				$li.each(function(i){
+					this.y = i % num;
+					this.x = parseInt(i / num);
+					$(this).css({
+						top:this.y*(liH+h_)+h_/2+'px',
+						left:this.x*+(liW+20)+'px'
+					});
+					
+				});
+			};
+				
+			$li.mousedown(function(e){
+				var xS = e.pageX;
+				var yS = e.pageY;
+				var topS = this.y*(liH+h_)+h_/2;
+				var leftS = this.x*+(liW+20);
+				var $This = $(this);
+				$(document).mousemove(function(e){
+					xN = e.clientX;
+					yN = e.clientY;
+					$This.css({
+						top:topS+yN-yS+'px',
+						left:leftS+xN-xS+'px'
+					});
+				});
+				$(document).mouseup(function(){
+					$(document).off('mousemove');
+					$(document).off('mouseup');
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<ul id="list">
+		<li style="background-image:url(images/1.png)"><span>课程1</span></li>
+		<li style="background-image:url(images/2.png)"><span>课程2</span></li>
+		<li style="background-image:url(images/3.png)"><span>课程3</span></li>
+		<li style="background-image:url(images/4.png)"><span>课程4</span></li>
+		<li style="background-image:url(images/5.png)"><span>课程5</span></li>
+		<li style="background-image:url(images/6.png)"><span>课程6</span></li>
+		<li style="background-image:url(images/7.png)"><span>课程7</span></li>
+		<li style="background-image:url(images/8.png)"><span>课程8</span></li>
+		<li style="background-image:url(images/9.png)"><span>课程9</span></li>
+		<li style="background-image:url(images/10.png)"><span>课程10</span></li>
+	</ul>
+</body>
+</html>

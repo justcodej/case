@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>小总结 评价</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+		list-style: none;
+	}
+	#list{
+		margin:200px 500px;
+	}
+	#list li{
+		width: 19px;
+		height: 20px;
+		margin-right: 2px;
+		float:left;
+		background: url(images/star.png) no-repeat right;
+	}
+	#list .on{
+		background: url(images/star.png) no-repeat;
+	}
+	#list .off{
+		background: url(images/star.png) no-repeat right;
+	}
+	#list span{
+		height: 20px;
+		display: inline-block;
+		margin-left: 10px;
+		font-size:13px;
+		text-align: center;
+		line-height: 22px;
+		color:gray;
+	}
+	</style>
+</head>
+<body>
+	<ul id="list">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<span>满意</span>
+	</ul>
+	<script>
+	var oList = document.getElementById('list');
+	var aLi = oList.getElementsByTagName('li');
+
+	
+	</script>
+</body>
+</html>

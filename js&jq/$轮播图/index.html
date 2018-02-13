@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+		list-style: none;
+	}
+	#wrap{
+		width: 1010px;
+		height: 450px;
+		margin:100px auto;
+		position: relative;
+	}
+	#wrap ul{
+		height: 450px;
+		width: 1010px;
+	}
+	#wrap ul li{
+		float:left;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: none;
+	}
+	#wrap ol{
+		position: absolute;
+		bottom: 20px;
+		left: 44%;
+		width: 154px;
+		height: 20px;
+	}
+	#wrap ol li{
+		float: left;
+		width: 20px;
+		height: 20px;
+		border-radius:100%;
+		background: #eee;
+		cursor: pointer;
+		margin-right: 10px;
+	}
+	#wrap ol .on{
+		background: orange;
+	}
+	#btn p{
+		width:40px;
+		height: 69px;
+		position:absolute;
+		top: 180px;
+		background: gray;
+		cursor:pointer;
+		text-align: center;
+		line-height: 90px;
+		font-size: 25px;
+	}
+	#btn #left{
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+		left: 0px;
+		background: url(images/btn.png);
+	}
+	#btn #right{
+		right:0px;
+		background: url(images/btn.png) 124px 0;
+		border-top-left-radius: 5px;
+		border-bottom-left-radius: 5px;
+	}
+	</style>
+	<script type='text/javascript' src='js/jQueryv1.12.4.js'></script>
+	<script>
+	$(function(){
+		(function(){
+			var $wrap = $('#wrap');
+			var $p = $('#btn p');
+			var $pic = $('#wrap ul li');
+			var $tab = $('#wrap ol li');
+			var leng = $pic.length;
+			var timer = null;
+			var index = 0;
+			$pic.eq(0).css('display','block');
+			$tab.eq(0).addClass('on');
+			$tab.index();
+			$tab.mouseenter(function(){
+				index = $(this).index();
+				$(this).addClass('on').siblings().removeClass('on');
+				$pic.eq(index).stop().fadeIn(500).siblings().stop().fadeOut(500);
+			});
+			$p.index();
+			$p.click(function(){
+				if ($(this).index()) {
+					index++;
+					index %= leng;
+				}else{
+					index--;
+					index %= leng;
+				}
+				$tab.eq(index).addClass('on').siblings().removeClass('on');
+				$pic.eq(index).stop().fadeIn(500).siblings().stop().fadeOut(500);
+			});
+			autoPlay();
+			function autoPlay(){
+				timer = setInterval(function(){
+					index++;
+					index %= leng;
+					$tab.eq(index).addClass('on').siblings().removeClass('on');
+					$pic.eq(index).stop().fadeIn(500).siblings().stop().fadeOut(500);
+				},2000);
+			}
+			
+			$wrap.hover(function(){
+				$p.fadeIn(200);
+				clearInterval(timer);
+			},function(){
+				$p.fadeOut(200);
+				autoPlay();
+			})
+		})();
+	})
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<ul>
+			<li><img src="images/1.jpg" alt=""></li>
+			<li><img src="images/2.jpg" alt=""></li>
+			<li><img src="images/3.jpg" alt=""></li>
+			<li><img src="images/4.jpg" alt=""></li>
+			<li><img src="images/5.jpg" alt=""></li>
+		</ul>
+		<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ol>
+		<div id="btn">
+			<p id="left"></p>
+			<p id="right"></p>
+		</div>
+			
+	</div>
+</body>
+</html>

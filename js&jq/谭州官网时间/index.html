@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin:0;padding: 0;}
+		body{
+			background: url(images/body.gif);
+		}
+		#con{
+			width: 200px;
+			height: 90px;
+			margin: 300px auto;
+		}
+		#left{
+			float: left;
+			width: 40px;
+			height: 54px;
+			border:1px solid red;
+			border-radius:5px;
+			padding: 5px;
+		}
+		#left .box{
+			width: 40px;
+			height: 45px;
+			background: red;
+			margin: 10px auto 0;
+		}
+		#con .time{
+			display: block;
+			color: #fff;
+		}
+		#con .year{
+			display: block;
+			color: #fff;
+		}
+		#con .week{
+			display: block;
+			color: #fff;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			var oBox = document.getElementsByClassName('week')[0];
+			var oTime = document.getElementsByClassName('time')[0];
+			var oYear = document.getElementsByClassName('year')[0];
+			var oWeek = document.getElementsByClassName('week')[0];
+			fn();
+			setInterval(fn,1000);
+			function fn(){
+				var date = new Date();
+				var week = date.getDay();
+				var Year = date.getFullYear();
+				var Month = getDay( date.getMonth()+1 );
+				var Day = getDay( date.getDate() );
+				var Shi = getDay( date.getHours() );
+				var Fen = getDay( date.getMinutes() );
+				var Miao = getDay( date.getSeconds() );
+				oTime.innerHTML = Shi.toString()+':'+Fen.toString()+':'+Miao.toString();
+				oYear.innerHTML = Year.toString()+'年'+Month.toString()+'月'+Day.toString()+'日';
+				if (week == 0) {
+					oWeek.innerHTML = '星期日';
+				}else if(week == 1){
+					oWeek.innerHTML = '星期一';
+				}else if(week == 2){
+					oWeek.innerHTML = '星期二';
+				}else if(week == 3){
+					oWeek.innerHTML = '星期三';
+				}else if(week == 4){
+					oWeek.innerHTML = '星期四';
+				}else if(week == 5){
+					oWeek.innerHTML = '星期五';
+				}else{
+					oWeek.innerHTML = '星期六';
+				};
+				function getDay( time ){
+					if (time<=9) {
+						return '0'+time;
+					}else{
+						return time;
+					};
+				};
+			};
+		};
+	</script>
+</head>
+<body>
+	<div id="con">
+		<div id="left">
+			<div class="box"></div>
+		</div>
+		<span class="time"></span>
+		<span class="year"></span>
+		<span class="week"></span>
+	</div>
+</body>
+</html>

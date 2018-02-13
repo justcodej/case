@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		button{
+			width: 40px;
+			height: 40px;
+			font-size: 18px;
+			outline: none;
+		}
+		.active{
+			background: red;
+		}
+		#wrap>div{
+			width: 500px;
+			height: 500px;
+			font-size: 18px;
+			border: 1px solid #ddd;
+		}
+	</style>
+	<script>
+
+		var oWrap = null;
+		var aBtn = null;
+		var aDiv = null;
+
+		window.onload = function(){
+
+			var T1 = new Tab( 'wrap' );
+				T1.init();
+				T1.autoPlay();
+
+			var T2 = new Tab( 'wrap1' );
+				T2.init();
+				T2.autoPlay();
+
+		}
+
+		Tab.prototype.autoPlay = function(){
+			var This = this;
+			setInterval(function(){
+
+				This.Num++;
+				This.Num%=This.aBtn.length;
+				
+				for (var i = 0; i < This.aBtn.length; i++) {
+					This.aBtn[i].className = '';
+					This.aDiv[i].style.display = 'none';
+				}
+				This.aBtn[This.Num].className = 'active';
+				This.aDiv[This.Num].style.display = 'block';
+
+			},2000);
+		}
+
+		function Tab(id){
+			this.oWrap = document.getElementById(id);
+			this.aBtn = this.oWrap.getElementsByTagName('button');
+			this.aDiv = this.oWrap.getElementsByTagName('div');
+			this.Num = 0;
+		}
+
+		Tab.prototype.init = function(){
+			var This = this;
+			for (var i = 0; i < this.aBtn.length; i++) {
+				this.aBtn[i].index = i;
+				this.aBtn[i].onclick = function(){
+					This.change( this );
+				}
+			}
+		}
+
+		Tab.prototype.change = function( obj ){
+			for (var i = 0; i < this.aBtn.length; i++) {
+				this.aBtn[i].className = '';
+				this.aDiv[i].style.display = 'none';
+			}
+			obj.className = 'active';
+			this.aDiv[obj.index].style.display = 'block';
+		}
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<button>1</button>
+		<button>2</button>
+		<button>3</button>
+
+		<div>11</div>
+		<div style='display:none;'>22</div>
+		<div style='display:none;'>33</div>
+	</div>
+
+	<div id="wrap1">
+		<button>1</button>
+		<button>2</button>
+		<button>3</button>
+
+		<div>11</div>
+		<div style='display:none;'>22</div>
+		<div style='display:none;'>33</div>
+	</div>
+</body>
+</html>

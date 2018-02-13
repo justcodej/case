@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>苹果相册</title>
+	<style>
+		*{
+			margin:0;
+			padding: 0;
+			list-style: none;
+		}
+		body,html{
+			height: 100%;
+		}
+		body{
+			background: #000;
+			perspective: 800px;
+			overflow: hidden;
+		}
+		#box{
+			width: 100%;
+			height: 200px;
+			transform-style:preserve-3d;
+			position: absolute;
+			top: 48%;
+			margin-top: -100px;
+			transform: rotateX(0deg);
+		}
+		#box ul li{
+			width: 300px;
+			height: 200px;
+			position: absolute;
+			top: 0;
+			transition: 1s;
+			overflow: hidden;
+			border-radius: 3px;
+			box-shadow: 0 0 10px rgba(255,0,0,.5);
+			-webkit-box-reflect:below 2px -webkit-linear-gradient(top,rgba(0,0,0,0) 40%,rgba(0,0,0,0.5) 100%);
+		}
+		#box ul li img{
+			width: 300px;
+			height: 200px;
+			display: block;
+		}
+		#box ul li.left{
+			transform: rotateY(45deg) translateZ(-100px);
+		}
+		#box ul li.mid{
+			transform: translateZ(50px);
+		}
+		#box ul li.right{
+			transform: rotateY(-45deg) translateZ(-100px);
+		}
+	</style>
+	<script>
+		window.onload = function(){
+
+			init( 9 );
+			function init( num ){
+				var oBox = document.getElementById('box');
+				var oUl = oBox.children[0];
+				var midIndex = parseInt( num/2 );
+				var midLeft = document.body.offsetWidth/2-150;
+
+				for (var i = 0; i < num; i++) {
+					var oLi = document.createElement('li');
+					oLi.innerHTML = '<img src="images/'+(i+1)+'.jpg" alt="">';
+					oUl.appendChild(oLi);
+				}
+				var aLi = oBox.getElementsByTagName('li');
+
+				window.onresize = function(){
+					midLeft = document.body.offsetWidth/2-150;
+					for (var i = 0; i < num; i++) {
+						aLi[i].style.left = midLeft - ( midIndex - i )*100 +'px';
+					};
+				}
+				for (var i = 0; i < num; i++) {
+					aLi[i].i = i;
+					aLi[i].style.left = midLeft - ( midIndex - i )*100 +'px';
+					if (aLi[i].i < midIndex) {
+						aLi[i].className = 'left';
+					}else if( aLi[i].i == midIndex ){
+						aLi[i].className = 'mid';
+					}else{
+						aLi[i].className = 'right';
+					};
+					aLi[i].onclick = function(){
+						for (var i = 0; i < num; i++) {
+							aLi[i].style.left = aLi[i].offsetLeft - (this.i-midIndex)*100 +'px';
+							aLi[i].className = aLi[i].i < this.i?'left':'right';
+							this.className = 'mid';
+						};
+							midIndex = this.i;
+					};
+				};
+			};
+		};
+	</script>
+</head>
+<body>
+	<div id="box">
+
+		<ul>
+		</ul>
+	</div>
+</body>
+</html>

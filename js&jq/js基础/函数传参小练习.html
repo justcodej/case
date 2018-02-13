@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数传参小练习</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+		list-style:none;
+	}
+	#list{
+		margin:60px 500px;
+	}
+	#list p{
+		height: 25px;
+		background: green;
+		text-align: center;
+		line-height: 25px;
+		font-size: 14px;
+		color: #fff;
+	}
+	#list li{
+		border: 1px solid #ddd;
+		height: 30px;
+		line-height: 30px;
+		text-indent:10px;
+		font-size: 15px;
+		position:relative;
+	}
+	#list li>span{
+		display: inline-block;
+		width:16px;
+		height: 16px;
+		background: #ddd;
+		line-height: 30px;
+		background: url(images/hsccbg.png) no-repeat ;
+		margin-left:10px;
+		cursor:pointer;
+	}
+	#list li .block{
+		position: absolute;
+		width: 100%;
+		display: none;
+		position: absolute;
+		top: -1px;
+		left: -11px;
+	}
+	#list li .block input{
+		width:120px;
+		height: 28px;
+		font-size: 15px;
+		text-indent: 10px;
+	}
+	#list li .block span{
+		display: inline-block;
+		width: 34px;
+		height: 20px;
+		font-size: 12px;
+		text-align: center;
+		line-height: 20px;
+		color: green;
+		cursor: pointer;
+	}
+	</style>
+</head>
+<body>
+	<ul id="list">
+		<p>分类名称</p>
+		<li>
+			<strong>HTML 作业</strong>
+			<span></span>
+			<div class="block">
+				<input type="text" value="HTML 作业">
+				<span>确认</span>
+				<span>取消</span>
+			</div>
+		</li>
+		<li>
+			<strong>HTML 作业</strong>
+			<span></span>
+			<div class="block">
+				<input type="text" value="HTML 作业">
+				<span>确认</span>
+				<span>取消</span>
+			</div>
+		</li>
+		<li>
+			<strong>HTML 作业</strong>
+			<span></span>
+			<div class="block">
+				<input type="text" value="HTML 作业">
+				<span>确认</span>
+				<span>取消</span>
+			</div>
+		</li>
+		<li>
+			<strong>HTML 作业</strong>
+			<span></span>
+			<div class="block">
+				<input type="text" value="HTML 作业">
+				<span>确认</span>
+				<span>取消</span>
+			</div>
+		</li>
+	</ul>
+	<script>
+	var oList = document.getElementById('list');
+	var aLi = oList.getElementsByTagName("li");
+		for (var i = 0; i < aLi.length; i++) {
+			fn1(aLi[i]);
+		};
+	function fn1(aLi){
+		var aSpan = aLi.getElementsByTagName('span');
+		var aBlock = aLi.getElementsByClassName('block');
+		var aInput = aLi.getElementsByTagName('input')[0];
+		var aStrong = aLi.getElementsByTagName('strong')[0];
+	
+
+
+		aSpan[0].onclick = function(){
+			aBlock[0].style.display = 'block';
+		};
+		aSpan[1].onclick = function(){
+
+			aStrong.innerHTML = aInput.value;
+			aBlock[0].style.display = 'none';
+		};
+
+		aSpan[2].onclick = function(){
+			aBlock[0].style.display = 'none';
+		};
+
+
+	};
+	</script>
+</body>
+</html>

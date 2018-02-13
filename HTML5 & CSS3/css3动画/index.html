@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css3动画</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		#box{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 200px;
+			height: 200px;
+			background: #ddd;
+		}
+		#text{
+			font-size: 50px;
+			text-align: center;
+			-webkit-text-stroke:1px #ff9c00;
+			color: transparent;
+			animation:mytext 1s infinite;
+		}
+		@keyframes myframes{
+			0% { background: #ddd;left:0; top: 0; }
+			25% {background: blue;left: 800px;top:0; }
+			50% {background: red;left: 800px;top:800px; }
+			75%{background: green;left: 0;top: 800px; }
+			100%{background: #ddd;left: 0;top: 0; }
+		}
+		@keyframes mytext{
+			0% {text-shadow:0 0 10px red;}
+			10% {text-shadow:0 0px 20px blue;}
+			20% {text-shadow: 0 0px 30px green;}
+			30% {text-shadow: 0 0px 40px yellow;}
+			40% {text-shadow: 0 0px 50px #ddd;}
+			50% {text-shadow: 0 0px 60px pink;}
+			60% {text-shadow: 0 0px 50px gray;}
+			70% {text-shadow: 0 0px 40px purple;}
+			80% {text-shadow: 0 0px 30px orange;}
+			90% {text-shadow: 0 0px 20px brown;}
+			100% {text-shadow: 0 0px 10px red;}
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<p id="text">斗鱼直播</p>
+	<script>
+		box.onclick = function(){
+			this.style.animation = '';
+			this.style.animation = 'myframes 5s 1s';
+			event.stopPropagation();
+		}
+		document.onclick = function(){
+			box.style.animationPlayState = 'paused';
+		}
+	</script>
+</body>
+</html>

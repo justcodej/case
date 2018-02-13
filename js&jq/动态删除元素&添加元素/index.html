@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动态删除元素和添加元素</title>
+	<style>
+		*{margin: 0;padding: 0;list-style: none;}
+		body{
+			background: url(images/bg.jpg);
+		}
+		#wrap{
+			width: 1000px;
+			margin: 0 auto;
+		}
+		#wrap .con{
+			width: 630px;
+			height: 40px;
+			border:2px solid orange;
+			margin: 100px auto 0;
+		}
+		#wrap .con .btn{
+			float: right;
+			width: 65px;
+			height: 40px;
+			text-align:center;
+			line-height: 40px;
+			font-size: 16px;
+			background: orange;
+			cursor: pointer;
+		}
+		#text{
+			padding: 3px;
+			float: left;
+			height: 34px;
+			width: 494px;
+			font-size:16px;
+			border:none;
+			resize:none;
+			text-indent: 10px;
+		}
+		#wrap ul{
+			width: 628px;
+			margin: 0 auto;
+		}
+		#wrap ul li{
+			width: 496px;
+			height: 40px;
+			text-align: left;
+			line-height: 40px;
+			text-indent: 10px;
+			background: #fff;
+		}
+	</style>
+	<script src='js/tz.js'></script>
+	<script>
+		window.onload = function(){
+			var oText = document.getElementById('text');
+			var oUl = document.getElementsByTagName('ul')[0];
+			var aLi = oUl.getElementsByTagName('li');
+			getClass('btn')[1].onclick = function(){
+				var elem = document.createElement('li');
+				var str = oText.value;
+				if (oText.value == '') {
+				}else{
+					if (aLi.length == 0) {
+						elem.innerHTML = str;
+						oUl.appendChild( elem );
+						oText.value = '';
+					}else{
+						oUl.insertBefore( elem,aLi[0] );
+						elem.innerText = str;
+						oText.value = '';
+						if (aLi.length >= 6) {
+							oUl.removeChild(aLi[5]);
+						}
+						for (var i = 0; i < aLi.length; i++) {
+							aLi[i].index = i;
+							var arr = [];
+							aLi[i].onclick = function(){
+								this.style.background = 'orange';
+							}
+						}
+					}
+					
+				}
+			}
+		};
+
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<div class="con">
+			<input type="text" id="text">
+			<div class="btn">删除</div>
+			<div class="btn">添加</div>
+		</div>
+		<ul></ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>移入延迟</title>
+</head>
+<style>
+	
+	*{
+		margin:0px;
+		padding:0px;
+		list-style: none;
+	}
+	#wrap{
+		margin:100px auto;
+		height: 40px;
+		background: black;
+	}
+	#wrap ul .list{
+		position: relative;
+	}
+	#wrap ul .list h3{
+		text-align: center;
+		line-height:40px;
+		font-size: 16px;
+		color:#fff;
+		border-right:1px solid #fff;
+		width:120px;
+		float:left;
+		cursor:pointer;
+	}
+	#wrap ul .list ul{
+		position: absolute;
+		top:40px;
+		display: none;
+	}
+	#wrap ul .list #dis1{
+		left: 0px;
+	}
+	#wrap ul .list #dis2{
+		left: 121px;
+	}
+	#wrap ul .list #dis3{
+		left: 242px;
+	}
+	#wrap ul .list #dis4{
+		left: 363px;
+	}
+	#wrap ul .list #dis5{
+		left: 484px;
+	}
+	#wrap ul .list ul li{
+		width:120px;
+		height: 40px;
+		background: red;
+		text-align: center;
+		line-height: 40px;
+	}
+</style>
+<body>
+	<div id="wrap">
+		<ul>
+			<li class="list">
+				<h3>首页</h3>
+				<ul id="dis1">
+					<li>1</li>
+				</ul>
+			</li>
+			<li class="list">
+				<h3>产品展示</h3>
+				<ul id="dis2">
+					<li>2</li>
+				</ul>
+			</li>
+			<li class="list">
+				<h3>联系我们</h3>
+				<ul id="dis3">
+					<li>3</li>
+				</ul>
+			</li>
+			<li class="list">
+				<h3>在线留言</h3>
+				<ul id="dis4">
+					<li>4</li>
+				</ul>
+			</li>
+			<li class="list">
+				<h3>关于</h3>
+				<ul id="dis5">
+					<li>5</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<script>
+	var oWrap = document.getElementById('wrap');
+	var aLi = oWrap.getElementsByClassName('list');
+
+	for (var i = 0; i < aLi.length; i++) {
+		fn( aLi[i] );
+	};
+
+	function fn( aLi ){
+		var oH3 = aLi.getElementsByTagName('h3')[0];
+		var oUl = aLi.getElementsByTagName('ul')[0];
+		var autoplay =null;
+
+
+		oH3.onmouseover = function(){
+			this.style.background = "red";
+			oUl.style.display = 'block';
+			clearInterval(autoplay);
+		}
+		oH3.onmouseout = function(){
+			autoplay = setInterval(function(){
+				oUl.style.display = 'none';
+			},200);
+			this.style.background = "black";
+		}
+
+	};
+	</script>
+</body>
+</html>

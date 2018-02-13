@@ -1,0 +1,45 @@
+*{margin:0;padding:0;list-style: none;}
+a{text-decoration: none;}
+img{display: block;}
+body{
+	width: 100%;
+	height: 100%;
+	background: #ffd200;
+}
+#wrap{
+	height: 100%;
+}
+#wrap .aircraft{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 680px;
+	margin-left: -340px;
+	margin-top: -169px;
+	animation: t 6s linear infinite;
+}
+#wrap .aircraft .fly{
+	width: 100%;
+	height: 100%;
+}
+#wrap .aircraft .fly img,#wrap .aircraft .propeller img{
+	width: 100%;
+	height: 100%;
+}
+#wrap .aircraft .propeller{
+	position: absolute;
+	top: 51%;
+	left: 86px;
+	width: 188px;
+	animation: f .2s linear infinite;
+}
+@keyframes f{
+	from { transform: rotateZ(0deg); }
+	to{ transform: rotateZ(360deg); }
+}
+@keyframes t{
+	0% { transform: translateY(0px); }
+	25% { transform: translateY(-20px); }
+	75% { transform: translateY( 20px); }
+	100% { transform: translateY(0px); };
+}

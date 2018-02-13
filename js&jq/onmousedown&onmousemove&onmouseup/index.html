@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>onmousedown</title>
+</head>
+	<script>
+		window.onload = function(){
+			document.onmousedown = function(e){
+				var e = e || event;
+				var x = e.clientX;
+				var y = e.clientY;
+				var oDiv = document.createElement('div');
+				oDiv.style.cssText = 'position:absolute;left:'+x+'px;top:'+y+'px;border:5px solid #0f0;';
+				document.onmousemove = function(e){
+					var e = e || event;
+					var x1 = e.clientX;
+					var y1 = e.clientY;
+					var w = x1>x? x1-x:x-x1;
+					var l = x1>x? x1-w:x-w;
+					var h = y1>y? y1-y:y-y1;
+					var t = y1>y? y1-h:y-h;
+					oDiv.style.cssText += 'left:'+l+'px;top:'+t+'px;width:'+w+'px;height:'+h+'px;';
+					document.body.appendChild(oDiv); 
+				};
+				document.onmouseup = function(){
+					document.onmousemove = null;
+					document.onmouseup = null;
+				};
+			};
+		};
+	</script>
+<body></body>
+</html>

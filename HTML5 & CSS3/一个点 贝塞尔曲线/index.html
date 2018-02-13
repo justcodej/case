@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>一个点的贝塞尔曲线</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		body{
+			background: #ddd;
+		}
+		#box{
+			width: 1000px;
+			height:1000px;
+			position: absolute;
+			top: 80px;
+			left: 50%;
+			margin-left: -500px;
+		}
+		#box span{
+			width:10px;
+			height: 10px;
+			border-radius: 100%;
+			background: orange;
+			position: absolute;
+			top: -5px;
+		}
+		#box span#start{
+			left: -5px;
+		}
+		#box span#mid{
+			left: 490px;
+		}
+		#box span#end{
+			left: 995px;
+		}
+		#canvas{
+			background: #fff;
+			display: block;
+			margin:80px auto;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			var oCanvas = document.getElementById('canvas');
+			var context = oCanvas.getContext('2d');
+			var oBox = document.getElementById('box');
+			var aSpan = oBox.children;
+
+			aSpan[1].onmousedown = function(e){
+				var xS = e.pageX,
+					yS = e.pageY,
+					lX = this.offsetLeft,
+					lY = this.offsetTop;
+				var This = this;
+				document.onmousemove = function(e){
+					This.style.left = e.pageX-xS+lX+'px';
+					This.style.top = e.pageY-yS+lY+'px';
+					darg(aSpan[0].offsetLeft+5,aSpan[0].offsetTop+5,aSpan[1].offsetLeft+5,aSpan[1].offsetTop+5,aSpan[2].offsetLeft+5,aSpan[2].offsetTop+5);
+					return false;
+				};
+				document.onmouseup = function(){
+					this.onmousemove = null;
+					this.onmouseup = null;
+				};
+			};
+
+			function darg(startX,startY,midX,midY,endX,endY){
+				context.clearRect(0,0,oBox.offsetWidth,oBox.offsetHeight);
+				context.save();
+				context.beginPath();
+				context.strokeStyle = 'pink';
+				context.lineWidth = '2';
+				context.moveTo(startX,startY);
+				context.quadraticCurveTo(midX,midY,endX,endY);
+				context.stroke();
+				context.restore();
+			};
+		};
+	</script>
+</head>
+<body>
+	<canvas id="canvas" width='1000' height='1000'></canvas>
+	<div id="box">
+		<span id="start"></span>
+		<span id="mid"></span>
+		<span id="end"></span>
+	</div>
+</body>
+</html>

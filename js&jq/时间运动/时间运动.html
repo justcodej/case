@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#box{
+		width: 100px;
+		height:100px;
+		background:red;
+	}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script src='js/time_flash.js'></script>
+	<script>
+	box.onclick = function(){
+			move(this,{
+			width:500,
+			height:800
+		},2000,'bounceBoth',function(){
+			this.style.background = 'blue';
+		});
+	};
+	</script>
+</body>
+</html>

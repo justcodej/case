@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>总结 练习2</title>
+	<style>
+	*{
+		margin:0px;
+		list-style:none;
+		padding:0px;
+	}
+	#wrap{
+		margin:100px 600px;
+		width: 260px;
+	}
+	#wrap li{
+		height: 25px;
+		margin:0 10px;
+	}
+	#wrap strong,#wrap span{
+		display: inline-block;
+		height: 20px;
+		font-size: 12px;
+		line-height: 25px;
+	}
+	#wrap strong{
+		width:150px;
+		font-style:normal;
+	}
+	#bottom{
+		padding: 3px 10px 0px 10px;
+		height: 25px;
+		border-top: 1px solid #ddd;
+	}
+	#bottom strong{
+		display: inline-block;
+		font-style:normal;
+		width:30px;
+		text-align:center;
+		line-height: 25px;
+		margin-right: 10px;
+	}
+	#bottom span{
+		display: inline-block;
+		border: 1px solid #ddd;
+		width:50px;
+		border-radius:3px;
+		margin-right: 5px;
+		font-size:12px;
+		text-align: center;
+		line-height: 25px;
+		cursor:pointer;
+	}
+	</style>
+</head>
+<body>
+	<ul id="wrap">
+		<li>
+			<input type="checkbox" >
+			<strong>私奔</strong>
+			<span>梁博</span>
+		</li>
+		<li>
+			<input type="checkbox" >
+			<strong>北京北京</strong>
+			<span>汪峰</span>
+		</li>
+		<li>
+			<input type="checkbox" >
+			<strong>我爱你中国</strong>
+			<span>汪峰</span>
+		</li>
+		<li>
+			<input type="checkbox" >
+			<strong>花火</strong>
+			<span>汪峰</span>
+		</li>
+		<li>
+			<input type="checkbox" >
+			<strong>回来</strong>
+			<span>汪峰</span>
+		</li>
+		<li>
+			<input type="checkbox" >
+			<strong>爱要有你才完美</strong>
+			<span>那英</span>
+		</li>
+	<div id="bottom">
+		<input type="checkbox">
+		<strong>全选</strong>
+		<span>收藏</span>
+		<span>添加</span>
+		<span>删除</span>
+	</div>
+	</ul>
+	<script>
+	var oWrap = document.getElementById("wrap");
+	var aLi = oWrap.getElementsByTagName('li');
+	var aInput = document.getElementsByTagName('input');
+	var arr = ["#f3fbfe","#fdfdfd"];
+	var str = "";
+	for (var i = 0; i < aLi.length; i++) {
+		aLi[i].style.background = arr[i%arr.length];
+		
+		aLi[i].onmouseover = function(){
+			str = this.style.background; //总结移入之前存颜色 不能换颜色之后存起来！
+			this.style.background = "#ebebeb";
+		};
+		aLi[i].onmouseout = function(){
+			this.style.background = str;
+		};
+	};
+	for (var i = 0; i < aInput.length; i++) { //后取再点击！
+		aInput[i].onoff = true;
+		aInput[i].index = i;
+		aInput[i].onclick = function(){
+			if ( this.onoff ) {
+				aLi[this.index].style.background = "#ebebeb";
+				aLi[this.index].onmouseover = function(){
+					this.style.background = "#ebebeb";
+				};
+				aLi[this.index].onmouseout = function(){
+					this.style.background = "#ebebeb";
+				};
+			}else{
+				aLi[this.index].style.background = arr[this.index%arr.length];
+				aLi[this.index].onmouseover = function(){
+					this.style.background = arr[this.index%arr.length];
+				};
+				aLi[this.index].onmouseout = function(){
+					this.style.background = arr[this.index%arr.length];
+				};
+			};
+			this.onoff = !this.onoff;// 有的时候报style错误 仔细检查代码哪里出错 而非报错处！
+		};
+	};
+	
+		aInput[6].onclick = function(){
+				this.onoff? aInput[6].onoff = true: aInput[6].onoff = false;
+				if ( this.onoff ) {
+					for (var i = 0; i < aInput.length; i++) {
+						if (i == (aInput.length)-1) {
+							break;
+						};
+						aInput[i].checked = true;
+						aLi[i].style.background = "#ebebeb";
+					};
+				}else{
+					for (var i = 0; i < aInput.length; i++) {
+						if (i == (aInput.length)-1) {
+							break;
+						};
+						aInput[i].checked = false;
+						aLi[i].style.background = arr[i%arr.length];
+					};
+				};
+				this.onoff = !this.onoff;
+		};
+	</script>
+</body>
+</html>

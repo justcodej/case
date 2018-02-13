@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>变换</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		body{
+			perspective: 800px;
+		}
+		#content{
+			width: 1100px;
+			height:1200px;
+			border:2px solid #ddd;
+			margin: 100px auto 0;
+			position: relative;
+		}
+		#content div{
+			position: absolute;
+			width: 200px;
+			height:200px;
+			transition:1s;
+			border:2px solid #333;
+		}
+		#box1{
+			transform-style:preserve-3d;
+			transform:translateY(100px) rotateX(90deg);
+		}
+		#box2{
+			transform-style:preserve-3d;
+			transform:translateY(-100px) rotateX(90deg);
+		}
+		#box3{
+			transform-style:preserve-3d;
+			transform:translate3d(0px,0px,-100px)
+		}
+		#box4{
+			transform-style:preserve-3d;
+			transform:translate3d(0,0,100px)
+		}
+		#box5{
+			transform-style:preserve-3d;
+			transform:translate(-100px) rotateY(90deg);
+		}
+		#box6{
+			transform-style:preserve-3d;
+			transform:translate(100px) rotateY(90deg);
+		}
+		#box7{
+			transform-style:flat;
+			background: red;
+			top: 50%;
+			left: 50%;
+		}
+		#box7:hover{
+			transform:rotate(360deg);
+		}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<div id="box1"></div>
+		<div id="box2"></div>
+		<div id="box3"></div>
+		<div id="box4">我是一个3D盒子</div>
+		<div id="box5"></div>
+		<div id="box6"></div>
+		<div id="box7">2d旋转盒子</div>
+		<p style="margin:300px 500px; width:500px;height: 20px;">transform-origin:基准 top left bottom right</p>
+	</div>
+
+</body>
+</html>

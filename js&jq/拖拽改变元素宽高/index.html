@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽改变大小</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		#box{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-left:-75px;
+			margin-top: -75px;
+			width: 150px;
+			height:150px;
+			background: #0f0;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			box.onmousedown = function(e){
+				var e = e || event;
+				var x = e.clientX;
+				var l = this.offsetLeft;
+				var w = this.offsetWidth;
+				//判断左边还是右边
+				var b = '';
+				if (x > w-10 + l) { // 右边
+					b = 'right'
+				}else if(x < l+10){// 左边
+					b = 'left';
+				}
+				document.onmousemove = function(e){
+					var e = e || event;
+					switch(b){
+						case 'left':
+						box.style.width = w - (e.clientX - x)+'px';
+						box.style.left = l + (e.clientX - x)+'px';
+							break;
+						case 'right':
+						box.style.width = e.clientX-x+w+'px';
+							break;
+					}
+				}
+				document.onmouseup = function(){
+					document.onmousemove = null;
+					document.onmouseup = null;
+				} 
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

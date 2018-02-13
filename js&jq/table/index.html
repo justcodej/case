@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单操作</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background: #ddd;
+		}
+		a{
+			text-decoration:none;
+			color: #333;
+		}
+		#tablebox{
+			background: #fff;
+			padding: 20px;
+			margin: 20px;
+		}
+		#tablebox table{
+			width: 100%;
+			border-collapse:collapse;
+		}
+		#tablebox table td,th{
+			border:1px solid #ccc;
+			padding: 8px 10px;
+			text-align: center;
+		}
+		#tablebox table th{
+			background:#333;
+			color:#fff;
+		}
+		#tablebox table tr{
+			text-align: center;
+		}
+		#tablebox table td{
+			font-size:12px;
+		}
+		#tablebox table td  a{
+			color:#333;
+			text-decoration: none;
+			cursor: pointer;
+		}
+	</style>
+	<script src='data/data.js'></script>
+	<script>
+		window.onload = function(){
+			var table = document.getElementById('table');
+			var tbody = document.createElement('tbody');
+			// 创建tbody
+			table.appendChild(tbody);
+			for (var i = 0; i < data.length; i++) {
+				var tr = document.createElement('tr');
+				if (i%2) tr.style.background = '#0f0';
+				var td = document.createElement('td');
+				td.innerHTML = i;
+				tr.appendChild(td);
+				table.tBodies[0].appendChild(tr);
+				for (var attr in data[i]) {
+					var td = document.createElement('td');
+					td.innerHTML = data[i][attr];
+					tr.appendChild(td);
+				}
+				var td = document.createElement('td');
+				td.innerHTML = '<a href="javascript:;">删除</a>';
+				var a = td.children[0]
+				a.onclick = function(){
+					table.tBodies[0].removeChild( this.parentNode.parentNode );
+					changeColor();
+				}
+				tr.appendChild(td);
+				table.tBodies[0].appendChild(tr);
+			}
+			// 各行变色
+			function changeColor(){
+				for (var i = 0; i < table.tBodies[0].rows.length; i++) {
+					if (i%2){
+						table.tBodies[0].rows[i].style.background = '#0f0';
+					}else{
+						table.tBodies[0].rows[i].style.background = '#fff';
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="tablebox">
+		<table id="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>歌名</th>
+					<th>歌手</th>
+					<th>专辑名称</th>
+					<th>金额</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</body>
+</html>

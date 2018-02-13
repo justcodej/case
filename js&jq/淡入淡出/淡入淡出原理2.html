@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>淡入淡出原理2</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+		list-style: none;
+	}
+	#box1{
+		width:100px;
+		height: 300px;
+		position:absolute;
+		top:100px;
+		left: -100px;
+		background: red;
+	}
+	#box2{
+		width:20px;
+		height: 40px;
+		background: blue;
+		position:absolute;
+		top:100px;
+		left: 100px;
+		text-align:center;
+		line-height:40px;
+		font-size:14px;
+		color:#fff;
+	}
+	#wrap{
+		width:1226px;
+		height: 460px;
+		margin:100px auto;
+		position:relative;
+	}
+	#wrap ul li{
+		opacity:0;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+	}
+	#wrap ol{
+		height: 16px;
+		position: absolute;
+		right:20px;
+		bottom:20px;
+	}
+	#wrap ol li{
+		float:left;
+		width:16px;
+		background: gray;
+		border:1px solid black;
+		text-align: center;
+		line-height: 16px;
+		font-size: 13px;
+		color: #fff;
+		margin-right:10px;
+		cursor:pointer;
+	}
+	#wrap ol .on{
+		background: orange;
+	}
+	</style>
+</head>
+<body>
+	<div id="box1">
+		<div id="box2">分享</div>
+	</div>
+	<div id="wrap">
+		<ul>
+			<li><img src="images/1.jpg" alt=""></li>
+			<li><img src="images/2.jpg" alt=""></li>
+			<li><img src="images/3.jpg" alt=""></li>
+			<li><img src="images/4.jpg" alt=""></li>
+			<li><img src="images/5.jpg" alt=""></li>
+		</ul>
+		<ol>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ol>
+	</div>
+	<script>
+	var oUl = wrap.getElementsByTagName('ul')[0];
+	var aImg = oUl.getElementsByTagName('li');
+
+	var oOl = wrap.getElementsByTagName('ol')[0];
+	var aBtn = oOl.getElementsByTagName('li');
+
+	//初始化
+	aImg[0].style.opacity = 1;
+	aImg[0].style.filter = 'alpha(opacity=100)'; 
+	aBtn[0].className = 'on';
+
+	for (var i = 0; i < aBtn.length; i++) {
+		aBtn[i].index = i;
+		aBtn[i].onclick = function(){
+			for (var i = 0; i < aBtn.length; i++) {
+				aBtn[i].className = '';
+				aImg[i].style.opacity = 0;
+			};
+			this.className = 'on';
+			move(aImg[this.index],'opacity',4,100);
+		};
+	};
+
+	box1.onmouseover = function(){
+		move(box1,'left',4,0);
+	};
+	box1.onmouseout = function(){
+		move(box1,'left',4,-100);
+	};
+
+	function move(obj,attr,speed,target){
+		speed = parseInt(getstyle(obj,attr))<target?speed:-speed;
+		clearInterval(obj.timer)
+		var n = 0;
+		obj.timer = setInterval(function(){
+			if (attr == 'opacity') {
+				n = Math.round(getstyle(obj,'opacity')*100);
+			}else{
+				n = parseInt(getstyle(obj,attr));
+			};
+			if (n == target) {
+				clearInterval(obj.timer);
+			}else{
+				if (attr == 'opacity') {
+					obj.style.opacity = (n+speed)/100;
+					obj.style.filter = 'alpha(opacity='+(n+speed)+')';
+				}else{
+					obj.style[attr] = n+speed+'px';
+				};
+			};
+		},13)
+	};
+
+	function getstyle(obj,attr){
+		return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr];
+	};
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

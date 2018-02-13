@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+		list-style: none;
+	}
+	#wrap{
+		margin:200px auto;
+		width:1226px;
+		height:460px;
+		position:relative;
+		overflow:hidden;
+	}
+	#wrap ul{
+		width: 1000%;
+		height: 460px;
+		position:absolute;
+		left:0px;
+		top:0px;
+	}
+	#wrap ul li{
+		float: left;
+	}
+	#wrap li span{
+		display: block;
+		position:absolute;
+		width:100%;
+		height: 50px;
+		background: rgba(0,0,0,.5);
+		bottom: -50px;
+		text-align:center;
+		line-height:50px;
+		color:#fff;
+	}
+	#btn1,#btn2{
+		width: 60px;
+		height: 100px;
+		background: black;
+		position: absolute;
+		cursor:pointer;
+	}
+	#btn1{
+		left: 0px;
+		top:190px;
+	}
+	#btn2{
+		right:0px;
+		top: 190px;
+	}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<ul id="List">
+			<li><img src="images/1.jpg" alt=""><span></span></li>
+			<li><img src="images/2.jpg" alt=""><span></span></li>
+			<li><img src="images/3.jpg" alt=""><span></span></li>
+			<li><img src="images/4.jpg" alt=""><span></span></li>
+			<li><img src="images/5.jpg" alt=""><span></span></li>
+		</ul>
+		<p id="btn1"></p>
+		<p id="btn2"></p>
+	</div>
+	<script type="text/javascript" src='js/Move.js'></script>
+	<script>
+	var oWrap = document.getElementById('wrap');
+	var aUl = oWrap.getElementsByTagName('ul')[0];
+	var aLi = document.getElementsByTagName('li');
+	var aP = document.getElementsByTagName('p');
+	var aSpan = document.getElementsByTagName('span');
+	var w = parseInt( getStyle(oWrap,'width') );
+	var num = 0;
+	for (var i = 0; i < aP.length; i++) {
+		aP[i].index = i;
+		aP[i].onclick = function(){
+			if (this.index) {
+				num++;
+				if (num>=aLi.length)num = aLi.length-1;
+				move(List,50,-w*num,'left')
+			}else{
+				num--;
+				if (num<=0)num=0;
+				move(List,50,-w*num,'left')
+			};
+		};
+	};
+	</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>W字排列</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+	}
+	div{
+		width: 30px;
+		height: 30px;
+		background: gray;
+		position: absolute;
+		text-align: center;
+		line-height: 30px;
+		font-size: 10px;
+	}
+	</style>
+</head>
+<body>
+	<script>
+	window.onload = function(){
+
+		var aDiv = document.getElementsByTagName('div');
+		for (var i = 0; i < 41; i++) {
+			document.body.innerHTML += "<div>"+i+"</div>";
+		};
+		for (var i = 0; i <aDiv.length; i++) {
+			aDiv[i].style.left = 30*i+"px";
+			if (Math.floor(i/10)%2 == 0) {
+				aDiv[i].style.top = 30*(i%10)+"px";      // i%10 = 0~9的数
+			}else{
+				aDiv[i].style.top = 30*(10-(i%10))+"px"; // 10 － i%10 = 0~9的数
+			};
+		};
+	};
+	</script>
+</body>
+</html>

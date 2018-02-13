@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>面向对象：基于jQ组件开发</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		#parent1 button,#parent2 button,#parent3 button,#parent4 button{
+			padding:10px;
+		}
+		#parent1 div,#parent2 div,#parent3 div,#parent4 div{
+			font-size: 20px;
+			width: 500px;
+			height: 450px;
+			border: 1px solid #ddd;
+		}
+		#parent1 .active,#parent2 .active,#parent3 .active,#parent4 .active{
+			background: red;
+			outline: none;
+		}
+	</style>
+	<script src='js/jQueryv1.12.4.js'></script>
+	<script>
+
+	/*
+		基于jQ的选项卡组件
+		Options : event delay
+	*/
+
+		window.onload = function(){
+
+			var T1 = new Tab();
+				T1.init('parent1',{
+
+				});
+
+			var T2 = new Tab();
+				T2.init('parent2',{
+					event : 'mouseenter',
+				});
+
+			var T3 = new Tab();
+				T3.init('parent3',{
+					event : 'mouseenter',
+					delay : 200
+				});
+		}
+
+		function Tab(){
+			var oParent = null;
+			var aBtn = null;
+			var aDiv = null;
+			var timer = null;
+			this.defalut = {
+				event : 'click',
+				delay : 0
+			}
+		}
+		Tab.prototype.init = function(oParent,opt){
+			$.extend( this.defalut , opt );
+			this.oParent = $('#'+oParent);
+			this.aBtn = this.oParent.find('button');
+			this.aDiv = this.oParent.find('div');
+
+			this.change();
+		}
+		Tab.prototype.change = function(){
+			var This = this;
+			this.aBtn.on(this.defalut.event,function(){
+				var _this = this;
+				if (This.defalut.event == 'mouseenter' && This.defalut.delay) {
+					This.timer = setTimeout(function(){
+						show(_this);
+					},This.defalut.delay)
+				}else{
+					show(this);
+				}
+			}).mouseleave(function(){
+				clearTimeout(This.timer);
+			});
+			
+			function show(obj){
+				This.aBtn.attr('class','');
+				This.aDiv.css('display','none');
+				$(obj).attr('class','active');
+				This.aDiv.eq($(obj).index()).css('display','block');
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="parent1">
+		<button class='active'>1</button>
+		<button>2</button>
+		<button>3</button>
+		<div>11111</div>
+		<div style='display:none;'>22222</div>
+		<div style='display:none;'>33333</div>
+	</div>
+
+	<div id="parent2">
+		<button class='active'>1</button>
+		<button>2</button>
+		<button>3</button>
+		<div>11111</div>
+		<div style='display:none;'>22222</div>
+		<div style='display:none;'>33333</div>
+	</div>
+	
+	<div id="parent3">
+		<button class='active'>1</button>
+		<button>2</button>
+		<button>3</button>
+		<div>11111</div>
+		<div style='display:none;'>22222</div>
+		<div style='display:none;'>33333</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>点击滚动图片</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+	}
+	#list{
+		margin:100px auto;
+		position:relative;
+		width:300px;
+		height: 490px;
+		border-radius:5px;
+		overflow: hidden;
+	}
+	#list ul{
+		position:absolute;
+		left:0px;
+		top:0px;
+		border:5px solid black;
+	}
+	#list li{
+		list-style: none;
+		width:290px;
+		height: 50px;
+		background: orange;
+		margin-bottom:2px;
+		text-align:center;
+		line-height:50px;
+	}
+	#list .up,#list .down{
+		width:300px;
+		height: 30px;
+		background: black;
+		color:#fff;
+		text-align: center;
+		line-height:30px;
+	}
+	#list .up{
+		position: absolute;
+		top:0px;
+	}
+	#list .down{
+		position:absolute;
+		bottom:0px;
+	}
+	</style>
+</head>
+<body>
+	<div id="list">
+		<ul class="con">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+			<li>11</li>
+			<li>12</li>
+			<li>13</li>
+			<li>14</li>
+			<li>15</li>
+			<li>16</li>
+			<li>17</li>
+			<li>18</li>
+			<li>19</li>
+			<li>20</li>
+			<li>21</li>
+		</ul>
+		<p class="up">向上</p>
+		<p class="down">向下</p>
+	</div>
+<script>
+	var oList = document.getElementById('list');
+	var oUl = document.getElementsByClassName('con')[0];
+	var oTop = document.getElementById('top');
+	var oBottom = document.getElementById('bottom');
+	var aBtn = oList.getElementsByTagName('p');
+	var aLi = document.getElementsByTagName('li');
+	var autoplay = null;
+	var i = 0;
+	var h = parseInt(getComputedStyle(oUl).height)-parseInt(getComputedStyle(oList).height);
+	aLi[0].style.height = '70px';
+	aLi[0].style.lineHeight = '90px';
+	aBtn[0].onmousedown = function(){
+		autoplay = setInterval(function(){
+			i += 2;
+			if (i > h) {
+				i = h
+			};
+			oUl.style.top = -i+'px';
+		},8);
+	};
+	aBtn[0].onmouseup = function(){
+		clearInterval(autoplay);
+	};
+	aBtn[1].onmousedown = function(){
+		autoplay = setInterval(function(){
+			i -= 2;
+			if (i<0) {
+				i = 0
+			};
+			oUl.style.top = -i+"px"
+		},8)
+	};
+	aBtn[1].onmouseup = function(){
+		clearInterval(autoplay);
+	};
+</script>
+</body>
+</html>

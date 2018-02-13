@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>面向对象拖拽</title>
+	<style>
+		*{
+			margin:0;
+			padding: 0;
+		}
+		#box{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 200px;
+			height: 200px;
+			background: red;
+		}
+	</style>
+	<script>
+		// window.onload = function(){
+		// 	var oBox = document.getElementById('box');
+		// 	oBox.onmousedown = function(ev){
+		// 		ev = ev || window.event;
+		// 		var disX = ev.clientX - oBox.offsetLeft;
+		// 		var disY = ev.clientY - oBox.offsetTop;
+
+		// 		document.onmousemove = function(ev){
+		// 			ev = ev || window.event;
+
+		// 			oBox.style.left = ev.clientX - disX + 'px';
+		// 			oBox.style.top = ev.clientY - disY + 'px';
+		// 		}
+		// 		document.onmouseup = function(){
+		// 			this.onmousemove = null;
+		// 			this.onmouseup = null;
+		// 		}
+		// 	}
+		// };
+		// 面向对象写法
+
+
+	
+
+		var oBox = null;
+		var disX = null;
+		var disY = null;
+		window.onload = function(){
+			var drag = new Drag();
+				drag.init();
+		};
+
+		function Drag(){
+			this.oBox = document.getElementById('box');
+		};
+
+		Drag.prototype.init = function(){
+			var This = this;
+			this.oBox.onmousedown = function(ev){
+				ev = ev || window.event;
+				This.fnDown(ev);
+			};
+		};
+
+		Drag.prototype.fnDown = function(ev){
+			var This = this;
+			this.disX = ev.clientX - this.oBox.offsetLeft;
+			this.disY = ev.clientY - this.oBox.offsetTop;
+
+			document.onmousemove = function(ev){
+				ev = ev || window.event;
+				This.fnMove(ev);
+				return false;
+			};
+			document.onmouseup = this.fnUp;
+		};
+
+		Drag.prototype.fnMove = function(ev){
+			this.oBox.style.left = ev.clientX - this.disX + 'px';
+			this.oBox.style.top = ev.clientY - this.disY + 'px';
+		};
+
+		Drag.prototype.fnUp = function(){
+			document.onmousemove = null;
+			document.onmouseup = null;
+		};
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

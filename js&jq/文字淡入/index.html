@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文字淡入</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		#wrap{
+			width: 1000px;
+			margin: 0 auto;
+		}
+		#wrap div{
+			width: 400px;
+			margin: 300px auto;
+		}
+		#wrap div p{
+			opacity: 0;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			var aP = document.getElementsByTagName('p');
+			var index = 0;
+			print();
+			function print(){
+				var arrP = [];
+				for (var i = 0; i < aP.length; i++) {
+					arrP.push( aP[i] );
+				};
+				move( arrP[index] ,function(){
+					index++;
+					if (index >= aP.length) {
+						for (var i = 0; i < aP.length; i++) {
+							aP[i].style.opacity = 1
+						}
+					}
+					print();
+				});
+			}
+			// 简单版淡入封装
+			function move( obj,endFn ){
+				num = 0;
+				timer = setInterval(function(){
+					num++;
+					obj.style.opacity = num/10;
+					if (num == 10) {
+						clearInterval( timer );
+						endFn && endFn.call(obj);
+					};
+				},100);
+					
+			}
+		};
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<div>
+			<p>与奉来生生前有过交集的政府工作人员告诉新京报记者</p>
+			<p>奉此前就职于新田县人武部任政委任政委任政委任政委</p>
+			<p>并参与了江华瑶族自治县某村庄定点扶贫工任政委任政</p>
+			<p>并参与了江华瑶族自治县某村庄定点扶贫工任政委任政</p>
+			<p>并参与了江华瑶族自治县某村庄定点扶贫工任政委任政</p>
+			<p>并参与了江华瑶族自治县某村庄定点扶贫工任政委任政</p>
+			<p>并参与了江华瑶族自治县某村庄定点扶贫工任政委任政</p>
+			<p>并参与了江华瑶族自治县某村庄定点扶贫工任政委任政</p>
+			<p>并参与了江华瑶族自治县某村庄定点扶贫工任政委任政</p>
+		</div>
+	</div>
+</body>
+</html>

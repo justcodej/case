@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文字搬迁</title>
+	<style>
+		*{margin: 0;padding: 0; list-style: none;}
+		body{
+			background: url(images/bg.jpg);
+		}
+		#wrap{
+			width: 1000px;
+			height: 550px;
+			margin: 200px auto;
+		}
+		#wrap>div{
+			float: left;
+		}
+		#wrap .message{
+			width: 200px;
+			height: 100%;
+			background: blue;
+		}
+		#wrap .message .btn{
+			width: 140px;
+			height: 40px;
+			margin: 150px auto 40px;
+			background: orange;
+			text-align: center;
+			font-size: 15px;
+			line-height: 40px;
+			cursor: pointer;
+		}
+		#wrap .message strong{
+			display: block;
+			width: 140px;
+			height: 40px;
+			background: orange;
+			margin: 0 auto;
+			line-height: 40px;
+			font-weight: normal;
+			font-size: 15px;
+			text-align: center;
+		}
+		#wrap .message ul{
+			width:140px;
+			height: 20px;
+			margin: 0 auto 40px;
+		}
+		#wrap .message ul li{
+			float: left;
+			width: 20px;
+			height: 20px;
+			border-radius: 100%;
+			background: #fff;
+			margin-right: 3px;
+		}
+		#text textarea{
+			border:none;
+			width: 370px;
+			height: 520px;
+			resize:none;
+			background: orange;
+			font-size:15px;
+			padding: 15px;
+
+		}
+		#wrap .display{
+			width: 370px;
+			height: 520px;
+			padding: 15px;
+			font-size: 15px;
+			background: gray;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			var oTextarea = document.getElementsByTagName('textarea')[0];
+			var str = document.getElementsByTagName('textarea')[0].innerHTML;
+			var oBtn = document.getElementsByClassName('btn')[0];
+			var oDisplay = document.getElementsByClassName('display')[0];
+			var oStrong = document.getElementsByTagName('strong')[0];
+			var num = 0;
+			oStrong.innerHTML = str.length+'/'+0;
+			oBtn.onclick = function(){
+				play();
+			}
+			function play(){
+				timer = setInterval(function(){
+					var str2 = str;
+					var str3 = str;
+					str2 = str2.substring( num,str.length );
+					oTextarea.innerHTML = str2;
+					str3 = str3.substring( 0,num );
+					oDisplay.innerHTML = str3;
+					oStrong.innerHTML = str2.length+'/'+num;
+					num++;
+					if (num == str.length+1) {
+						clearInterval( timer );
+					}
+				},60)
+			};
+		}
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<div id="text">
+			<textarea name="" cols="30" rows="10">笔者要问的是，这样的体制对农民公平吗，对城镇刚性买房的居民公平吗？改革开放以来，土地管理部门出台的这一规定，使农村只能被动地使自己的集体土地强制便宜征用给地方政府，地方政府再协议出让，后来改为地方政府行政寡头垄断招拍挂，高价倒卖给开发商。一方面农民、农村、农业受损，没有获得土地财产的收益，其实不平等地转移了农村和农民的财产和收益；另一方面，将地价房价推得如此之高，使一些低收入刚工作刚性买房的居民，背上沉重的债务，地方政府通过高地价和高房价转移了居民的相当部分其他收入。如没人搞制造业，农业更是亏损不赚钱，农民、农村和农业长期得到不发展，国土部的这一规定和政策，不能不是一个根源。</textarea>
+		</div>
+		<div class="message">
+			<div class="btn">文字右移 >>></div>
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+			<strong></strong>
+		</div>
+		<div class="display"></div>
+	</div>
+</body>
+</html>

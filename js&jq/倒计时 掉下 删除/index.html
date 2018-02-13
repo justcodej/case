@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>倒计时</title>
+	<style>
+		*{margin:0px;padding:0px; list-style:none;}
+		body{
+			background: url(images/header_bg.png) no-repeat center 50px;
+		}
+		#con{
+			width:1200px;
+			height:392px;
+			margin:700px auto;
+			background: #fff;
+			position:relative;
+			top: 0px;
+			left: 0px;
+		}
+		#con .list{
+			float:left;
+			width:290px;
+			height:390px;
+			background: #fff;
+			position: relative;
+			top: 0px;
+		}
+		#pos1{
+			left: 0px;
+		}
+		#pos2{
+			left: 13px;
+		}
+		#pos3{
+			left: 27px;
+		}
+		#pos4{
+			left: 40px;
+		}
+		#con .list img{
+			margin:20px 20px 10px 20px;
+			cursor: pointer;
+		}
+		#con .list a{
+			display: block;
+			text-decoration: none;
+			color: #333;
+			font-size: 16px;
+			text-align: center;
+		}
+		#con .list>div{
+			width:100%;
+			height: 84px;
+			background: #fcdc1c;
+			margin-top:10px;
+			color: #333;
+			font-size: 14px;
+			text-indent: 20px;
+			margin:10px auto;
+		}
+		#con .list .box{
+			margin-top: 20px;
+			width: 250px;
+			height: 45px;
+			font-size: 20px;
+			text-align:center;
+		}
+	</style>
+	<script src="js/doMove.js"></script>
+	<script>
+		window.onload = function(){
+			var oList = document.getElementsByClassName('list');
+			for (var i = 0; i < oList.length; i++) {
+				fn( oList[i] );
+			}
+				
+			function fn( list ){
+				var aImg = list.getElementsByTagName('img');
+				var aBtn = list.getElementsByClassName('btn');
+				var aTxt = list.getElementsByClassName('txt');
+				var aBox = list.getElementsByClassName('box');
+				var timer = null;
+				var dou = null;
+				var iNew = null;
+				var iNow = null;
+				var num = 0;
+				var t = 0;
+				var str = '';
+				var arr = [];
+				for (var i = 15; i > 0; i-=2) {
+					arr.push(i,-i);
+				}
+				arr.push(0);
+				aBtn[0].onclick = function(){
+					clearInterval( timer );
+					timer = setInterval(function(){
+						iNow = new Date();
+						iNew = new Date( aTxt[0].value );
+						t = Math.floor( (iNew - iNow)/1000 );
+						if (t >= 0) { 
+							str ='抢购中 距结束：'+ Math.floor( t/86400 )+'天'+ Math.floor( t%86400/3600 )+'时'+Math.floor( t%86400%3600/60 )+'分'+ Math.floor( t%60 )+'秒';
+							aBox[0].innerHTML = str;
+						}else{
+							clearInterval( dou );
+							dou = setInterval(function(){
+								n = parseInt( getStyle( list,'left' ) );
+								num++;
+								if (num == arr.length) {
+									clearInterval(dou);
+									endFn();
+								}
+								list.style.left = arr[num]+n+'px';
+							},13);
+						}
+					},1000);
+				};
+				list.onclick = function(){
+							clearInterval( dou );
+							dou = setInterval(function(){
+								n = parseInt( getStyle( list,'left' ) );
+								num++;
+								if (num == arr.length) {
+									clearInterval(dou);
+									move( list,'top',10,600 );
+								}
+								list.style.left = arr[num]+n+'px';
+							},13);
+				}
+				function getStyle( obj,attr ){
+					return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr];
+				};
+			};
+		};
+	</script>
+</head>
+<body>
+	<div id="con">
+		<div class="list" id="pos1">
+			<img src="images/1.jpg" alt="">
+			<a href="#">珍享 智利进口车厘子/樱桃 26-28...</a>
+			<div>
+				<input type="text" value="January 4,2017 19:0:0" class="txt">
+				<input type="button" value="点击" class="btn">
+				<div class="box"></div>
+			</div>
+		</div>
+		<div class="list" id="pos2">
+			<img src="images/2.jpg" alt="">
+			<a href="#">珍享 智利进口车厘子/樱桃 26-28...</a>
+			<div>
+				<input type="text" value="January 4,2017 19:0:0" class="txt">
+				<input type="button" value="点击" class="btn">
+				<div class="box"></div>
+			</div>
+		</div>
+		<div class="list" id="pos3">
+			<img src="images/3.jpg" alt="">
+			<a href="#">珍享 智利进口车厘子/樱桃 26-28...</a>
+			<div>
+				<input type="text" value="January 4,2017 19:0:0" class="txt">
+				<input type="button" value="点击" class="btn">
+				<div class="box"></div>
+			</div>
+		</div>
+		<div class="list" id="pos4">
+			<img src="images/4.jpg" alt="">
+			<a href="#">珍享 智利进口车厘子/樱桃 26-28...</a>
+			<div>
+				<input type="text" value="January 4,2017 19:0:0" class="txt">
+				<input type="button" value="点击" class="btn">
+				<div class="box"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

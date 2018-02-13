@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>面向对象组件：弹窗</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		button{
+			width: 30px;
+			height: 20px;
+		}
+		.login{
+			position: absolute;
+			top: 0;
+			left: 0;
+			border: 1px solid #ddd;
+		}
+		.login .head{
+			height: 45px;
+			background: gray;
+		}
+		.login .head .title{
+			color: #fff;
+		}
+		.login .head .close{
+			color: #fff;
+			float: right;
+			margin-right: 10px;
+			cursor: pointer;
+		}
+	</style>
+	<script>
+
+		window.onload = function(){
+			var aBtn = document.getElementsByTagName('button');
+
+			aBtn[0].onclick = function(){
+				var A1 = new Alert();
+				A1.init({
+					title : '登陆',
+					iNow : 0
+				});
+			};
+			aBtn[1].onclick = function(){
+				var A2 = new Alert();
+				A2.init({
+					w : 320,
+					h : 260,
+					pos : 'right',
+					title : '小提示',
+					iNow : 1
+				});
+			};
+		}
+
+		function Alert(){
+			this.default = {
+				w : 500,
+				h : 450,
+				pos : 'center',
+				title : '标题',
+				iNow : 0
+			};
+		}
+
+		Alert.prototype.json = {};
+
+		Alert.prototype.init = function(opt){
+
+			extend(this.default,opt);
+			if (this.json[opt.iNow] == undefined) {
+				this.json[opt.iNow] = true;
+			}
+
+			if (this.json[opt.iNow]){
+				this.createElement();
+				this.setData();
+				this.close();
+				this.json[opt.iNow] = false;
+			}
+		}
+
+		Alert.prototype.createElement = function(){
+			this.login = document.createElement('div');
+			this.login.className = 'login';
+			this.login.innerHTML = '<div class="head"><span class="title">'+this.default.title+'</span><span class="close">X</span></div>'
+			document.body.appendChild(this.login);
+		}
+
+		Alert.prototype.setData = function(){
+			this.login.style.width = this.default.w+'px';
+			this.login.style.height = this.default.h+'px';
+
+			if (this.default.pos == 'center') {
+				this.login.style.left = (getViewWidth()-this.login.offsetWidth)/2+'px';
+				this.login.style.top = (getViewHeight()-this.login.offsetHeight)/2+'px';
+			}else if(this.default.pos == 'right'){
+				this.login.style.left = (getViewWidth()-this.login.offsetWidth)+'px';
+				this.login.style.top = (getViewHeight()-this.login.offsetHeight)+'px';
+			}
+		}
+		Alert.prototype.close = function(){
+			var This = this;
+			var oClose = this.login.getElementsByTagName('div')[0].getElementsByTagName('span')[1];
+
+			oClose.onclick = function(){
+				document.body.removeChild(This.login);
+				This.json[0] = true;
+			
+			}
+
+		}
+
+		function getViewWidth(){
+			return document.documentElement.clientWidth;
+		}
+		function getViewHeight(){
+			return document.documentElement.clientHeight;
+		}
+
+		function extend( obj1,obj2 ){
+			for( var attr in obj2 ){
+				obj1[attr] = obj2[attr];
+			}
+		}
+	</script>
+</head>
+<body>
+	<button>1</button>
+	<button>2</button>
+	<button>3</button>
+</body>
+</html>

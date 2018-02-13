@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>计算器</title>
+	<style>
+	*{
+		margin:0px;
+		padding: 0px;
+		list-style: none;
+	}
+	body{
+		background: gray;
+	}
+	#wrap{
+		width: 285px;
+		height: 420px;
+		border-radius:5px;
+		border:2px solid #ddd;
+		margin:0 auto;
+		background: #fdfdfd;
+	}
+	#show{
+		margin:30px auto 30px;
+		width: 255px;
+		height: 50px;
+		border: 1px solid #ddd;
+		text-align: right;
+		line-height: 50px;
+		font-size:20px;
+		font-weight: bold;
+		padding-right: 10px;
+		overflow: hidden;
+	}
+	#wrap ul{
+		height: 50px;
+	}
+	#wrap ul li {
+		float:left;
+		text-align: center;
+		line-height: 50px;
+		width: 50px;
+		height: 50px;
+		margin: 10px;
+		background: #ddd;
+		cursor:pointer;
+	}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div id="show"></div>
+		<ul>
+			<li class="num">1</li>
+			<li class="num">2</li>
+			<li class="num">3</li>
+			<li class="symbols">+</li>
+		</ul>
+		<ul>
+			<li class="num">4</li>
+			<li class="num">5</li>
+			<li class="num">6</li>
+			<li class="symbols">-</li>
+		</ul>
+		<ul>
+			<li class="num">7</li>
+			<li class="num">8</li>
+			<li class="num">9</li>
+			<li class="symbols">*</li>
+		</ul>
+		<ul>
+			<li class="num">0</li>
+			<li class="num">.</li>
+			<li id="result">=</li>
+			<li class="symbols">/</li>
+		</ul>
+	</div>
+	<script>
+	var oShow = document.getElementById('show');
+	var aNum = document.getElementsByClassName('num');
+	var aSymbols = document.getElementsByClassName('symbols');
+	var oResult = document.getElementById('result');
+	var num1 = '';
+	var num2 = '';
+	var symbols = '';
+	for (var i = 0; i < aNum.length; i++) {
+		aNum[i].onclick = function(){
+			if (num1) {
+				oShow.innerHTML += this.innerHTML;
+				num2 = oShow.innerHTML;
+			}else{
+				oShow.innerHTML += this.innerHTML;
+				num1 = oShow.innerHTML;
+			};
+				alert(num1);
+				alert(num2);
+		};
+	};
+	for (var i = 0; i < aSymbols.length; i++) {
+		aSymbols[i].onclick = function(){
+			oShow.innerHTML = this.innerHTML;
+			symbols = this.innerHTML;
+		};
+	};
+	</script>
+</body>
+</html>

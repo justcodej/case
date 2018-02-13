@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>哆啦A梦</title>
+	<style>
+	body{
+		background: #ddd;
+		overflow: hidden;
+	}
+		*{
+			margin:0;
+			padding:0;
+		}
+		canvas{
+			background: #fff;
+			display: block;
+			margin:80px auto;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="1000"></canvas>
+	<script>
+		var oCanvas = document.getElementById('canvas');
+		var cxt = oCanvas.getContext('2d');
+		console.log(cxt)
+		// 哆啦A梦头部
+		cxt.beginPath();
+		cxt.lineWidth = '2';
+		cxt.strokeStyle = 'red';
+		cxt.fill(  );
+	</script>
+</body>
+</html>

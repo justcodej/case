@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{margin:0px;padding:0px;}
+	div{
+		width:50px;
+		height: 50px;
+		background: red;
+		position: absolute;
+		top: 0px;
+	}
+	</style>
+</head>
+<body>
+	<script>
+	window.onload = function(){
+		var aDiv = document.getElementsByTagName('div');
+		var leng = 25;
+		var num = 0;
+		var timer = null;
+		for (var i = 0; i < leng; i++) {
+			document.body.innerHTML += '<div style=left:'+ i*60+'px' +'></div>'
+		};
+
+		document.onclick = function(){
+			clearInterval(timer);
+			var n = parseInt( getStyle( aDiv[leng-1], 'top' ) );
+			if (n == 0) {
+				timer = setInterval(function(){
+					doMove(aDiv[num],'top',10,500);
+					num++;
+					if ( num == leng) {
+						clearInterval(timer)
+					};
+				},50);
+			}else{
+				timer = setInterval(function(){
+					doMove(aDiv[num-1],'top',10,0);
+					num--;
+					if ( num == 0) {
+						clearInterval(timer)
+					};
+				},50);
+			};
+		};
+		function getStyle(obj,attr){
+			return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr];
+		};
+
+		function doMove(obj,attr,speed,target,endFn){
+			speed = parseInt( getStyle(obj,attr) ) < target? speed:-speed;
+			clearInterval(obj.timer);
+			obj.timer = setInterval(function(){
+				s = parseInt( getStyle(obj,attr) ) + speed;
+				if (s > target && speed > 0 || s < target && speed < 0) {
+					s = target;
+				};
+				obj.style[attr] = s+'px';
+				if (s == target) {
+					clearInterval(obj.timer);
+					endFn && endFn();
+				};
+			},13)
+		}
+
+	};
+	</script>
+</body>
+</html>

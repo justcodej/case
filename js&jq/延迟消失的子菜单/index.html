@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{margin:0px;padding:0px; list-style: none;}
+	#menu{
+		width:1100px;
+		height: 40px;
+		background: #aaa;
+		margin:100px auto;
+		overflow:hidden;
+	}
+	#menu ul{
+		width:550px;
+		height: 30px;
+		margin:5px auto;
+	}
+	#menu ul li {
+		float:left;
+		width:100px;
+		height: 30px;
+		margin-right: 10px;
+		border-radius:5px;
+		background: red;
+		text-align: center;
+		line-height: 30px;
+		color:#fff;
+		cursor:pointer;
+	}
+	#list1,#list2,#list3,#list4,#list5{
+		width:300px;
+		height: 30px;
+		background: orange;
+		border-radius: 5px;
+		position: absolute;
+		top: 158px;
+		display: none;
+	}
+	#list1{
+		left:330px;
+	}
+	#list2{
+		left: 450px;
+	}
+	#list3{
+		left:560px;
+	}
+	#list4{
+		left: 680px;
+	}
+	#list5{
+		left: 790px;
+	}
+	</style>
+	<script>
+window.onload = function(){
+	var aLi = document.getElementsByTagName('li');
+	var aSpan = document.getElementsByTagName('span');
+	var timer = null;
+	var s = 0;
+	for (var i = 0; i < aLi.length; i++) {
+		aLi[i].index = i;
+		aLi[i].onmouseover = function(){
+			aSpan[s].style.display = 'none';
+			aSpan[this.index].style.display = 'inline-block';
+		};
+		aLi[i].onmouseout = function(){
+			var _this = this;
+			s = _this.index;
+			timer = setTimeout(function(){
+				aSpan[_this.index].style.display = 'none';
+			},300);
+		};
+	};
+	for (var i = 0; i < aSpan.length; i++) {
+		aSpan[i].index = i;
+		aSpan[i].onmouseover = function(){
+			clearTimeout(timer);
+		};
+		aSpan[i].onmouseout = function(){
+			var _this = this;
+			setTimeout(function(){
+				aSpan[_this.index].style.display = 'none';
+			},300)
+		};
+	};
+};
+	</script>
+</head>
+<body>
+	<div id="menu">
+		<ul>
+			<li>首页</li>
+			<li>产品展示</li>
+			<li>驱动中心</li>
+			<li>公司简介</li>
+			<li>关于我们</li>
+		</ul>
+	</div>
+	<span id="list1"></span>
+	<span id="list2"></span>
+	<span id="list3"></span>
+	<span id="list4"></span>
+	<span id="list5"></span>
+</body>
+</html>

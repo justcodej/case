@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串点击隐藏</title>
+	<style>
+		*{margin:0px;padding: 0px;}
+		#con{
+			width:400px;
+			height: 200px;
+			margin:300px auto;
+		}
+		span{
+			line-height: 30px;
+			cursor: pointer;
+			background: yellow;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			var oP = document.getElementsByTagName('p')[0];
+			var oSpan = document.getElementsByTagName('span')[0];
+			var str = oP.innerHTML;
+			var onOff = false;
+			oP.innerHTML = str.substring(0,20);
+			oSpan.onclick = function(){
+				if (onOff) {
+					oP.innerHTML = str.substring(0,20);
+					this.innerHTML = '>>>展开';
+				}else{
+					oP.innerHTML = str.substring();
+					this.innerHTML = '>>>隐藏';
+				};
+				onOff = !onOff;
+			};
+		};
+	</script>
+</head>
+<body>
+	<div id="con">
+		<p>在发展对华关系上，瑞士创造了许多“第一”。１９５０年９月，瑞士与中国建交，成为最早与中国建交的西方国家之一。１９８０年，瑞士企业与中方成立了第一家中外合资的工业企业。２００７年，瑞士成为第一个承认中国完全市场经济地位的欧洲国家。２０１３年７月，瑞士成为第一个与中国签署自贸协定的欧洲大陆国家。２０１４年７月，《中国－瑞士自由贸易协定》正式生效实施，成为中国在世界经济２０强和欧洲大陆的首个自贸伙伴。</p><span>>>>隐藏</span>
+	</div>
+</body>
+</html>

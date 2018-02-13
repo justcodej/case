@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	var arr = ["清心","200px","78.0元",window,document,Number("123"),[],{},null,"abc"-9,0-9,23,"122",+9,-7,function(){alert(3),true,false}];
+	var num = "";
+	var a = "";
+	var n = "";
+	var maxarr = [];
+	for (var i = 0; i < arr.length; i++) {
+		if (typeof(arr[i]) == "number" && isNaN(arr[i]) == false) {
+			num += arr[i]+",";
+		};
+	};
+	for (var i = 0; i < arr.length; i++) {
+		if (typeof(arr[i]) == "number" || typeof(arr[i]) == "string" ) {
+			if (isNaN(parseFloat(arr[i])) == false) {
+				a += arr[i]+", ";
+				maxarr.push(parseFloat(arr[i]));
+			};
+		};
+	};
+	var max = -999999999;
+	for (var i = 0; i < maxarr.length; i++) {
+		if (maxarr[i] > max) {
+			max = maxarr[i];
+		};
+	};
+	for (var i = 0; i < arr.length; i++) {
+		if (typeof(arr[i]) != "string" && typeof(arr[i])!= "object" && typeof(arr[i]) != "boolean" && typeof(arr[i])!= "array"&&typeof(arr[i])!= "function") {
+			if (isNaN(arr[i])) {
+				n = i;
+			};
+		};
+	};
+	document.body.innerHTML += "数组里面数字有："+num+"<br />";
+	document.body.innerHTML += "可以转换成数字的有："+a+"<br />";
+	document.body.innerHTML += "其中最大值是："+max+"<br />";
+	document.body.innerHTML += "NaN的位置是："+n+"<br />";
+
+	</script>
+</body>
+</html>

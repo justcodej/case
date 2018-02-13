@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义属性</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+	}
+	li{
+		list-style:none;
+	}
+	#content{
+		margin:60px auto;
+		width:1226px;
+		height:460px;
+		position:relative;
+	}
+	#list{
+		position: absolute;
+		right: 30px;
+		bottom:30px;
+	}
+	#list li{
+		float:left;
+		width:16px;
+		height:16px;
+		margin-right: 10px;
+		border-radius:100%;
+		background: rgba(0,0,0,.5);
+		text-align: center;
+		line-height: 16px;
+		font-size:12px;
+		color:#fff;
+		cursor:pointer;
+	}
+	#list .on{
+		background: orange;
+	}
+	#btn1,#btn2{
+		width:42px;
+		height: 69px;
+		position: absolute;
+		cursor:pointer;
+	}
+	#btn1{
+		background: url(images/btn.png);
+		top: 200px;
+		left: 0px;
+	}
+	#btn2{
+		background: url(images/btn.png) 125px 0;
+		top: 200px;
+		right:0px;
+	}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<img src="" alt="">
+		<ul id="list">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<div id="btn1"></div>
+		<div id="btn2"></div>
+	</div>
+	<script>
+		var oContent = document.getElementById("content");
+		var aImg = oContent.getElementsByTagName('img')[0];
+		var oList = document.getElementById('list');
+		var aLi = oList.getElementsByTagName('li');
+		var oBtn1 = document.getElementById('btn1');
+		var oBtn2 = document.getElementById('btn2');
+		var arr = ['images/1.jpg','images/2.jpg','images/3.jpg','images/4.jpg','images/5.jpg'];
+		var num = 0;
+		aImg.src = arr[0];
+		aLi[0].className = "on";
+		for (var i = 0; i < aLi.length; i++) {
+			aLi[i].index = i;
+			aLi[i].onclick = function(){
+				for (var i = 0; i < aLi.length; i++) {
+					aLi[i].className = '';
+				};
+				aImg.src = arr[this.index];
+				this.className = "on";
+			};
+		};
+
+		btn2.onclick = function(){
+			num++;
+			if(num > 4)num =0;
+			play();
+		};
+		btn1.onclick = function(){
+			num--;
+			if (num<0)num = 4;
+			play();
+		};
+		function play(){
+			aImg.src = arr[num];
+			for (var i = 0; i < aLi.length; i++) {
+				aLi[i].className = '';
+			};
+			aLi[num].className = "on";
+		};
+		function auto(){
+			num++;
+			if(num > 4)num =0;
+			play();
+		};
+		autoplay = setInterval(auto,1000);
+
+		oContent.onmouseover = function(){
+			clearInterval( autoplay );
+		};
+		oContent.onmouseout = function(){
+			autoplay = setInterval(auto,1000);
+		};
+	</script>
+</body>
+</html>

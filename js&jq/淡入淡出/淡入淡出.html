@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>淡入淡出导航</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+		list-style: none;
+	}
+	#wrap{
+		margin: 200px auto;
+		width:1226px;
+		height:460px;
+		position:relative;
+	}
+	#wrap ol li{
+		position: absolute;
+		top:0px;
+		left: 0px;
+		opacity: 0;
+	}
+	#wrap ul{
+		height: 16px;
+		position:absolute;
+		right:20px;
+		bottom:20px;
+	}
+	#wrap ul li{
+		float:left;
+		width:16px;
+		margin-right:10px;
+		border-radius:100%;
+		background: gray;
+		cursor:pointer;
+		font-size:13px;
+		text-align:center;
+		line-height: 16px;
+		color:#fff;
+	}
+	#wrap ul .on{
+		background: orange;
+	}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<ol>
+			<li><img src="images/1.jpg" alt=""></li>
+			<li><img src="images/2.jpg" alt=""></li>
+			<li><img src="images/3.jpg" alt=""></li>
+			<li><img src="images/4.jpg" alt=""></li>
+			<li><img src="images/5.jpg" alt=""></li>
+		</ol>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+	</div>
+	<script src="js/Move.js"></script>
+	<script>
+	var aOl = document.getElementsByTagName('ol')[0];
+	var aImg = aOl.getElementsByTagName('li');
+
+	var aUl = document.getElementsByTagName('ul')[0];
+	var aLi = aUl.getElementsByTagName('li');
+
+	aImg[0].style.opacity = 1;
+	aImg[0].style.filter = 'alpha(opacity=100)';
+	aLi[0].className = 'on';
+	for (var i = 0; i < aLi.length; i++) {
+		aLi[i].index = i;
+		aLi[i].onclick = function(){
+			for (var j = 0; j < aLi.length; j++) {
+				aLi[j].className = '';
+				aImg[j].style.opacity = 0;
+				aImg[j].filter = 'alpha(opacity=0)';
+			};
+			aLi[this.index].className = 'on';
+			move(aImg[this.index],'opacity',4,100);
+			
+		};
+	};
+
+	function move(obj,attr,speed,target){
+		clearInterval(obj.timer)
+		var n = 0;
+		obj.timer = setInterval(function(){
+			if (attr == 'opacity') {
+				n = Math.round(getStyle(obj,'opacity')*100);
+			}else{
+				n = parseInt(getStyle(obj,attr));
+			};
+			if (n == target) {
+				clearInterval(obj.timer);
+			}else{
+				if (attr == 'opacity') {
+					obj.style.opacity = (n+speed)/100;
+					obj.style.filter = 'alpha(opacity='+(n+speed)+')';
+				}else{
+					obj.style[attr] = n+speed+'px';
+				};
+			};
+		},13);
+	};
+	function getStyle( obj,attr ){
+		return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr];
+	};
+	</script>
+</body>
+</html>

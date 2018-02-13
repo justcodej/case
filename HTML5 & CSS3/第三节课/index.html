@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css3背景颜色渐变</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		#box1{
+			width: 200px;
+			height: 200px;
+			background:-webkit-linear-gradient(30deg,red,blue);
+		}
+		#box2{
+			width: 1200px;
+			height:200px;
+			background: -webkit-radial-gradient(0px 200px,#ffffff,#00bfff);
+			margin:100px auto;
+		}
+		#bazi{
+			width: 500px;
+			height: 500px;
+			border-radius: 100%;
+			box-shadow: 20px 20px 20px rgba(0,0,0,.3);
+			margin:0 auto;
+			background: -webkit-radial-gradient(orange,red);
+		}
+	</style>
+	<script>
+	window.onload = function(){
+		(function(){
+			
+			var oBox2 = document.getElementById('box2');
+		
+			var width = oBox2.offsetWidth;
+			var height = oBox2.offsetHeight;
+			var timer = setInterval(function(){
+				var x = getStyle(oBox2,'background')
+				var X = parseInt( x.substring(41,45) );
+				X+=5;
+				if (X >= width) {
+					clearInterval(timer);
+				}
+				oBox2.style.background = '-webkit-radial-gradient('+X+'px 100px,#ffffff,#00bfff)';
+			},13);
+		})();
+		function getStyle(obj,attr){
+			return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr];
+		}
+	};	
+	</script>
+</head>
+<body>
+	<div id="box1">线性渐变</div>
+	<div id="box2"></div>
+	<div id="bazi"></div>
+</body>
+</html>

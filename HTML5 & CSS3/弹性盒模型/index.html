@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>弹性盒模型</title>
+	<style>
+		*{margin:0;padding:0;}
+		p{
+			width: 800px;
+			margin: 0 auto 0;
+		}
+		#box{
+			width:800px;
+			height:300px;
+			box-shadow: 0 0 10px;
+			margin:300px auto 0;
+			display: flex;
+		}
+		#box div{
+			flex:1 1;
+			box-shadow: 0 0 10px;
+		}
+		#box1{
+			width:800px;
+			height:300px;
+			box-shadow: 0 0 10px;
+			margin:300px auto 0;
+			display: flex;
+			flex-wrap: wrap;/* 超出换行 给父元素添加*/
+		}
+		#box1 div{
+			flex:none;
+			width: 200px;
+			box-shadow: 0 0 10px;
+		}
+		#box2{
+			width:800px;
+			height:300px;
+			box-shadow: 0 0 10px;
+			margin:300px auto 0;
+			display: flex;
+			justify-content:center; /*flex-start 从开始位置排列 flex-end 从末尾开始排列 center 居中排列*/
+		}
+		#box2 div{
+			width: 150px;
+			height: 100px;
+			flex:none;
+			box-shadow: 0 0 10px;
+		}
+		#box3{
+			width:900px;
+			height:300px;
+			box-shadow: 0 0 10px;
+			margin:300px auto 0;
+			display: flex;
+			justify-content:space-between; /*这是两端无间隙中间平均分配 space-around是所有间隙平均分配*/
+		}
+		#box3 div{
+			width: 150px;
+			height:100px;
+			flex:none;
+			box-shadow: 0 0 10px;
+		}
+	</style>
+</head>
+<body>
+	 <div id="box">
+	 	<div></div>
+	 	<div></div>
+	 	<div></div>
+	 	<div></div>
+	 	<div></div>
+	 </div>
+	 <p>1) flex为1 平均分配空间 不受margin影响</p>
+	 <div id="box1">
+	 	<div></div>
+	 	<div></div>
+	 	<div></div>
+	 	<div></div>
+	 	<div></div>
+	 </div>
+	 <p>2)设定了固定宽度 flex为none 超出部分换行显示</p>
+	 <div id="box2">
+	 	<div></div>
+	 	<div></div>
+	 	<div></div>
+	 	<div></div>
+	 	<div></div>
+	 </div>
+	 <p>3) 设定了固定高度 总宽度富余 两边平均分配</p>
+	 <div id="box3">
+	 	<div></div>
+	 	<div></div>
+	 	<div></div>
+	 	<div></div>
+	 	<div></div>
+	 </div>
+	 <p style="margin-bottom: 100px;">4) 设定了固定高度 总宽度富余 盒子中间平均分配</p>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>loading</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		body{
+			background: #000;
+		}
+		#box{width: 720px;height: 240px;margin:200px auto 0;background: #000;border:1px solid rgba(255,255,255,.3);	border-left: 0;}
+		#box .wrap{width: 240px;height: 240px;box-sizing: border-box;float: left;border-left: 1px solid rgba(255,255,255,.3);position: relative;}
+		/*p1*/
+		#box .wrap .p1{font-size: 11px; width:1em; height:4em; margin:8em auto; background: #fff; animation:p1 1s ease-in-out infinite; position: relative;animation-delay: 0.1s}
+		#box .wrap .p1:before,#box .wrap .p1:after{
+			content: '';
+			display: block;
+			position: absolute;
+			font-size: 11px;
+			width:1em;
+			height:4em;
+			background: #fff;
+		}
+		#box .wrap .p1:before{top: 0; left: -1.5em; animation: p1 1s infinite;}
+		#box .wrap .p1:after{top: 0; left: 1.5em; animation: p1 1s infinite;animation-delay: 0.3s}
+		@keyframes p1{
+			0%,80%,100%{ height:4em; box-shadow: 0 0 0 #fff; }
+			40% { height:5.5em; box-shadow: 0 -1.5em 0 #fff; }
+		}
+		@-webkit-keyframes p1{
+			0%,80%,100%{ height:4em; box-shadow: 0 0 0 #fff; }
+			40% { height:5.5em; box-shadow: 0 -1.5em 0 #fff; }
+		}
+		
+		#box .wrap .p2{/*x y 虚化大小 半径 颜色*/
+			width: 50%; 
+			height: 50%; 
+			margin:25% 25%; 
+			border-radius: 100%; 
+			animation: p2 1.7s ease infinite;
+			
+		} 
+
+		@keyframes p2{
+			0% {
+				transform: rotateZ(0deg);
+				box-shadow: 0 -5.2em 0 -3.2em #fff,
+							0 -5.2em 0 -3.3em #fff,
+							0 -5.2em 0 -3.4em #fff,
+							0 -5.2em 0 -3.5em #fff,
+							0 -5.2em 0 -3.6em #fff;
+			}
+			5%,95% {
+				box-shadow: 0 -5.2em 0 -3.2em #fff,
+							0 -5.2em 0 -3.3em #fff,
+							0 -5.2em 0 -3.4em #fff,
+							0 -5.2em 0 -3.5em #fff,
+							0 -5.2em 0 -3.6em #fff;
+			}
+			30% {
+				box-shadow:0 -5.2em 0 -3.2em #fff, 
+				-2em -5em 0 -3.3em #fff, 
+				-4.2em -3.9em 0 -3.4em #fff, 
+				-5.3em -2.6em 0 -3.5em #fff, 
+				-5.6em -1.5em 0 -3.6em #fff;
+			}
+			55% {
+				box-shadow: 0 -5.2em 0 -3.2em #fff, 
+				-0.7em -5.1em 0 -3.3em #fff, 
+				-1.2em -5em 0 -3.4em #fff, 
+				-1.6em -4.9em 0 -3.5em #fff, 
+				-1.8em -4.8em 0 -3.6em #fff;
+			}
+			100% {
+				transform: rotateZ(360deg);
+				box-shadow: 0 -5.2em 0 -3.2em #fff,
+							0 -5.2em 0 -3.3em #fff,
+							0 -5.2em 0 -3.4em #fff,
+							0 -5.2em 0 -3.5em #fff,
+							0 -5.2em 0 -3.6em #fff;
+			}
+		}
+		#box .wrap .p3{ font-size:90px; width:1em; height: 1em; margin: .6em auto; border-radius: 100%; border:.15em solid #333;border-left: .15em solid #fff; animation:p2 .9s linear infinite;}
+
+		@keyframes p3{
+			from {
+				transform: rotateZ(0deg);
+			}
+			to {
+				transform: rotateZ(270deg);
+			}
+		}
+
+	</style>
+	<script></script>
+</head>
+<body>
+	<div id="box">
+		<div class="wrap">
+			<div class="p1"></div>
+		</div>
+		<div class="wrap">
+			<div class="p2"></div>
+		</div>
+		<div class="wrap">
+			<div class="p3"></div>
+		</div>
+	</div>
+</body>
+</html>

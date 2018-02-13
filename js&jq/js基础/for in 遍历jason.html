@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>遍历jason</title>
+	<style>
+	span{
+		display: inline-block;
+		margin-right: 20px;
+	}
+	</style>
+</head>
+<body>
+	<script>
+	var str = '';
+	var jason = {
+		"湖北":['武汉','黄石','黄冈','神龙架','襄阳','武穴'],
+		"北京":['海淀','朝阳','丰台','怀化','四惠'],
+		"广东":['惠州','广州','深圳','东莞','abc']
+	};
+	for(var key in jason){
+		str += "<h3>"+key+"</h3>";
+		for (var i = 0; i < jason[key].length; i++) {
+			str += "<span>"+jason[key][i]+"</span>";
+		};
+		//str += "</p>";
+	};
+	document.body.innerHTML = str;
+	</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数传参小练习2</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+		list-style:none;
+	}
+	#wrap{
+		margin:100px auto;
+		width:248px;
+		position: relative;
+	}
+	#title{
+		height: 40px;
+	}
+	#title span,#title strong,#title em{
+		display: inline-block;
+		width: 80px;
+		height: 40px;
+		background: orange;
+		border-top-left-radius:5px;
+		border-top-right-radius:5px;
+		text-align: center;
+		line-height: 40px;
+		cursor:pointer;
+	}
+	#title strong{
+		font-weight:normal;
+	}
+	#title em{
+		font-style: normal;
+	}
+	#wrap .list{
+		position: absolute;
+		top: 40px;
+		left:0px;
+		display: none;
+	}
+	#wrap .list li{
+		height: 35px;
+		width:246px;
+		border: 1px solid #ddd;
+		border-top:none;
+		text-indent: 10px;
+		line-height: 35px;
+	}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div id="title">
+			<span>列表一</span>
+			<strong>列表二</strong>
+			<em>列表三</em>
+		</div>
+		<ul class="list">
+			<li>1</li>
+			<li>1</li>
+			<li>1</li>
+			<li>1</li>
+			<li>1</li>
+			<li>1</li>
+			<li>1</li>
+			<li>1</li>
+		</ul>
+		<ul class="list">
+			<li>2</li>
+			<li>2</li>
+			<li>2</li>
+			<li>2</li>
+			<li>2</li>
+			<li>2</li>
+			<li>2</li>
+			<li>2</li>
+			<li>2</li>
+			<li>2</li>
+			<li>2</li>
+			<li>2</li>
+		</ul>
+		<ul class="list">
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+			<li>3</li>
+		</ul>
+	</div>
+	<script>
+	var oTitle = document.getElementById('title');
+	var oSpan = oTitle.getElementsByTagName('span')[0];
+	var oStrong = oTitle.getElementsByTagName('strong')[0];
+	var oEm = oTitle.getElementsByTagName('em')[0];
+	var aList = document.getElementsByClassName('list');
+
+
+	aList[0].style.display = 'block';
+	oSpan.onclick = function(){
+		aList[0].style.display = 'block';
+		aList[1].style.display = 'none';
+		aList[2].style.display = 'none';
+	};
+	oStrong.onclick = function(){
+		aList[0].style.display = 'none';
+		aList[1].style.display = 'block';
+		aList[2].style.display = 'none';
+	};
+	oEm.onclick = function(){
+		aList[0].style.display = 'none';
+		aList[1].style.display = 'none';
+		aList[2].style.display = 'block';
+	};
+	
+
+	for (var i = 0; i < aList.length; i++) {
+		fn1(aList[i]);
+	};
+
+	function fn1(aList){
+	var aLi = aList.getElementsByTagName("li");
+		for (var i = 0; i < aLi.length; i++) {
+			aLi[i].onmouseover = function(){
+				for (var i = 0; i < aLi.length; i++) {
+					aLi[i].style.height = "35px";
+				};
+				this.style.height = "50px";
+			};
+		};
+	};
+	</script>
+</body>
+</html>

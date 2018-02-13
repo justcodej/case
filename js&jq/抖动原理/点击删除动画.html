@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+	}
+	#images1,#images2,#images3,#images4,#images5{
+		position:absolute;
+		top:200px;
+		left:200px;
+	}
+	#images2{
+		left: 400px;
+	}
+	#images3{
+		left: 600px;
+	}
+	#images4{
+		left: 800px;
+	}
+	#images5{
+		left: 1000px;
+	}
+	</style>
+</head>
+<body>
+		<img  src="images/1.1.jpg" alt="" id="images1">
+		<img  src="images/1.2.jpg" alt="" id="images2">
+		<img  src="images/1.3.jpg" alt="" id="images3">
+		<img  src="images/1.4.jpg" alt="" id="images4">
+		<img  src="images/1.5.jpg" alt="" id="images5">
+
+
+	<script type="text/javascript" src="js/Move.js"></script>
+	<script>
+	var oWrap = document.getElementById('wrap');
+	var aImg = document.getElementsByTagName('img');
+	var arr = [];
+
+	for (var i = 10; i > 0; i-=2) {
+		arr.push(i,-i);
+	};
+	arr.push(0);
+
+	for (var i = 0; i < aImg.length; i++) {
+		d( aImg[i] )
+	};
+	
+	function d( Img ){
+			var dir = parseInt(getStyle(Img,'left'));
+			Img.onclick = function(){
+			clearInterval(Img.Timer);
+			var num = 0;
+			this.Timer = setInterval(function(){
+				Img.style.left = dir + arr[num]+'px';
+				num ++;
+				if (num > arr.length || arr[num]==0){
+					clearInterval(Img.Timer);
+					fn( Img,13,900,'top',function(){
+						Img.style.display = 'none';
+					});
+				};
+			},100);
+		};
+	};
+
+	</script>
+</body>
+</html>

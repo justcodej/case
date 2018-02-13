@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时间版导航</title>
+	<style>
+	*{
+		margin:0px;
+		padding:0px;
+		list-style: none;
+	}
+	#wrap{
+		width:1010px;
+		height:450px;
+		position:relative;
+		background: #fff;
+		margin:100px auto;
+		overflow:hidden;
+	}
+	#List{
+		width: 5050px;
+		height: 450px;
+		margin-left: 0px;
+	}
+	#List li{
+		float: left;
+	}
+	#wrap ol{
+		position: absolute;
+		right:20px;
+		bottom:20px;
+	}
+	#wrap ol li{
+		width:14px;
+		height: 14px;
+		border-radius:100%;
+		margin-right:10px;
+		background: #ddd;
+		float:left;
+		cursor:pointer;
+	}
+	#left,#right{
+		width:38px;
+		height:90px;
+		position:absolute;
+		top: 170px;
+		background: #ddd;
+		cursor: pointer;
+	}
+	#left{
+		left:0px;
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+	}
+	#right{
+		border-top-left-radius: 5px;
+		border-bottom-left-radius: 5px;
+		right:0px;
+	}
+	#wrap ol .on{
+		background: orange;
+	}
+	</style>
+	<script src='js/speed_flash.js'></script>
+	<script>
+	window.onload=function(){
+		var oUl = document.getElementsByTagName('ul')[0];
+		var aLi = oUl.getElementsByTagName('li');
+
+		var oOl = document.getElementsByTagName('ol')[0];
+		var aBtn = oOl.getElementsByTagName('li');
+		var aP = document.getElementsByTagName('p');
+		var num = 0;
+		aBtn[0].className = 'on';
+
+		for (var i = 0; i < aBtn.length; i++) {
+			aBtn[i].index = i;
+			aBtn[i].onclick = function(){
+				aBtn[num].className = '';
+				num = this.index;
+				this.className = 'on';
+				move(List,{marginLeft:-1010*num},-50);
+			};
+		};
+	};
+
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<ul id="List">
+			<li><img src="images/1.jpg" alt=""></li>
+			<li><img src="images/2.jpg" alt=""></li>
+			<li><img src="images/3.jpg" alt=""></li>
+			<li><img src="images/4.jpg" alt=""></li>
+			<li><img src="images/5.jpg" alt=""></li>
+		</ul>
+		<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ol>
+			<p id="left"></p>
+			<p id="right"></p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0px;padding: 0px;}
+		#con{
+			width: 600px;
+			height: 100%;
+			margin:300px auto;
+		}
+		p{
+			margin-bottom: 30px;
+		}
+		span{
+			display: inline-block;
+			background: orange;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			var oP = document.getElementsByTagName('p')[0];
+			var aInput = document.getElementsByTagName('input');
+
+			aInput[2].onclick = function(){
+				var str = aInput[0].value;
+				var arr = oP.innerHTML.split(str);
+				if (str == false)return;
+				oP.innerHTML = arr.join('<span>'+str+'</span>');
+			};
+			aInput[3].onclick = function(){
+				var str1 = aInput[0].value;
+				var str2 = aInput[1].value;
+				var arr1 = oP.innerHTML.split(str1);
+				oP.innerHTML = arr1.join(str2);
+			};
+		};
+	</script>
+</head>
+<body>
+<div id="con">
+		 <p>我不知道亲爱的读者是否曾关注“老三届”们的命运和成长过程？这是一批特殊历史境遇中造就的一批特殊胆略、特殊气质、特殊品行的人们。他们，经历了史无前例的无产阶级“文化大革命”，继而又成群结队地到农村插队落户，接受贫下中农的“再教育”。以后，他们之中的一些人被招工、招干或当兵，一些人被推荐上了大学，还有的到国外留学。总之，该走的都走了，真正当了农民的寥寥无几。
+
+	　　由于历史的原因，这茬人过早的失去了读书的机会。所以，只要他们取得读书的机会，便拼着命往书里钻。有一位当了省委副书记的北京插队知青，在上大学前就三遍通读《资本论》，写了厚厚十八本读书笔记。这一代人，与其父辈们相比：少保守，少教条；与比他们年轻的一代人相比：更具有使命感，多思考，多实干。在社会转型、时代变迁中，这一代人是我们国家、民族的希望，是世纪交替的桥梁！
+
+	　　习近平，就是知青大军中的一员。1969年初，他还不满16岁就来到延川县梁家河村，直到1975年10月离开这个小山村，人生最宝贵的青春年华，都是在陕北艰苦的农村度过的。这段插队经历，虽然使他吃了不少苦，受了不少罪，但这段人生历练，却是他一生中最宝贵的一笔财富。他念念不忘曾经养育他的黄土地，念念不忘陕北的父老乡亲，说明他既是有情之人，也是有心之人，是黄土地忠诚的儿子。</p>
+	<input type="text"><input type="text"><input type="button" value="查找"><input type="button" value="替换">
+</div>
+</body>
+</html>

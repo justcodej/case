@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{margin:0px;padding:0px;}
+	#box{
+		width:300px;
+		height: 800px;
+		background: #aaa;
+	}
+	#title{
+		width:350px;
+		height: 200px;
+		background: orange;
+		position: absolute;
+		top: 0px;
+		left: 310px;
+		display: none;
+	}
+	</style>
+	<script>
+	window.onload = function(){
+		box.onmouseover = function(){
+			title.style.display = 'inline-block';
+		};
+		box.onmouseout = function(){
+			title.timer = setTimeout(function(){
+				title.style.display = 'none';
+			},300);
+		};
+		title.onmouseover = function(){
+			clearTimeout( title.timer );
+			this.style.display = 'inline-block';
+		};
+		title.onmouseout = function(){
+			this.style.display = 'none';
+		};
+	};
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+	<div id="title"></div>
+</body>
+</html>

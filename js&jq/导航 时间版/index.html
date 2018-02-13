@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时间版 轮播</title>
+	<style>
+		*{margin:0px; padding: 0px; list-style:none;}
+		#con{
+			width:1010px;
+			height: 450px;
+			margin: 300px auto;
+			position: relative;
+			overflow: hidden;
+		}
+		#con ul{
+			position: absolute;
+			top: 0px;
+			left: 0px;
+		}
+		#con ul li{
+			float: left;
+		}
+		#con ol{
+			position: absolute;
+			right: 20px;
+			bottom:20px;
+		}
+		#con ol li{
+			cursor: pointer;
+			float: left;
+			width: 14px;
+			height: 14px;
+			background: #ddd;
+			border-radius:100%;
+			margin-right: 10px;
+		}
+		#con ol .on{
+			background: orange;
+		}
+		p{
+			width:34px;
+			height:80px;
+			background: gray;
+			position: absolute;
+			top: 180px;
+			cursor: pointer;
+		}
+		#left{
+			left: 0px;
+		}
+		#right{
+			right:0px;
+		}
+	</style>
+	<script src='js/time_move.js'></script>
+	<script>
+	window.onload = function(){
+			var oCon = document.getElementById('con');
+			var oUl = oCon.getElementsByTagName('ul')[0];
+			var aLi = oUl.getElementsByTagName('li');
+			var aImg = document.getElementsByTagName('img');
+
+			var oOl = oCon.getElementsByTagName('ol')[0];
+			var aBtn = oOl.getElementsByTagName('li');
+
+			var aP = document.getElementsByTagName('p');
+			var oLeft = document.getElementById('left');
+			var oRight = document.getElementById('right');
+			var num = 0;
+			var n = 0;
+
+			oUl.style.width = parseInt( getstyle( oCon,'width' ) )*aBtn.length+'px';
+			aBtn[0].className = 'on';
+
+			for (var i = aBtn.length - 1; i >= 0; i--) {
+				aBtn[i].index = i;
+				aBtn[i].onclick = function(){
+					for (var i = aBtn.length - 1; i >= 0; i--) {
+						aBtn[i].className = '';
+					}
+					this.className = 'on';
+					num = this.index;
+					n = this.index;
+					move( oUl,{left:-1010*this.index},400,'linear' )
+				};
+			}
+			for (var i = aP.length - 1; i >= 0; i--) {
+				aP[i].xyz = i;
+				aP[i].onclick = function(){
+					if (this.xyz) {
+						if (num == aBtn.length-1) {
+							num = 0;
+						}else{
+							num++;
+						}
+						for (var i = aBtn.length - 1; i >= 0; i--) {
+							aBtn[i].className = '';
+						}
+						aBtn[num].className = 'on';
+						n++;
+						move(oUl,{left:-1010*n},400,'linear',function(){
+							if (n == aLi.length) {
+								aImg[0].style.position = 'static';
+								oUl.style.left = 0;
+								n = 0;
+							}
+						})
+						if (n == aLi.length) {
+							aImg[0].style.position = 'relative';
+							aImg[0].style.left = 1010*aBtn.length+'px';
+						}
+					}else{
+						if (num == 0) {
+							num = aBtn.length-1;
+						}else{
+							num--;
+						};
+						for (var i = aBtn.length - 1; i >= 0; i--) {
+							aBtn[i].className = '';
+						}
+						aBtn[num].className = 'on';
+						if (n == 0) {
+							aImg[4].style.position = 'relative';
+							aImg[4].style.left = -1010*aBtn.length+'px';
+						}
+						n--;
+						move( oUl,{left:-1010*n},300,'linear',function(){
+							if (n == -1) {
+								aImg[4].style.position = 'static';
+								oUl.style.left = -1010*(aBtn.length-1)+'px';
+								n = 4;
+							}
+						})
+					}
+				};
+			}
+	};
+	</script>
+</head>
+<body>
+	<div id="con">
+		<ul>
+			<li><img src="images/1.jpg" alt=""></li>
+			<li><img src="images/2.jpg" alt=""></li>
+			<li><img src="images/3.jpg" alt=""></li>
+			<li><img src="images/4.jpg" alt=""></li>
+			<li><img src="images/5.jpg" alt=""></li>
+		</ul>
+		<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ol>
+		<p id="left"></p>
+		<p id="right"></p>
+	</div>
+</body>
+</html>
